@@ -4,7 +4,7 @@ import { FormUpload, Menu } from "grommet-icons";
 import SignUpAndLogIn from "./SignUpAndLogIn";
 import Sidebar from "./Sidebar";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "./actions/authActions";
+import { logoutUser } from "../actions/authActions";
 
 const buttonStyle = {
   display: "inline - block",
@@ -37,7 +37,7 @@ function AppBar(props) {
     if (auth.isAuthenticated) {
       setOpenSignUp(undefined);
     }
-  });
+  }, [auth.isAuthenticated]);
 
   return (
     <Box
@@ -75,9 +75,6 @@ function AppBar(props) {
         <Box gridArea="user">
           {auth.isAuthenticated ? (
             <>
-              <Heading level="3" margin="none" gridArea="header">
-                Hi {auth.user.name}!
-              </Heading>
               <Button
                 label="Sign out"
                 onClick={() => {

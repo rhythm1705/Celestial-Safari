@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Grommet, ResponsiveContext } from "grommet";
-import AppBar from "./AppBar";
+import AppBar from "./components/AppBar";
+import Launches from "./pages/Launches/Launches";
+import Home from "./pages/Home/Home";
 import theme from "./Theme";
 
 import jwt_decode from "jwt-decode";
@@ -9,6 +11,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import { Provider } from "react-redux";
 import store from "./store";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -34,12 +38,15 @@ function App() {
         <ResponsiveContext.Consumer>
           {size => (
             <Box fill>
-              <AppBar> </AppBar>
-              <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-                <Box flex align="center" justify="center">
-                  App Body
+              <Router>
+                <AppBar> </AppBar>
+                <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+                  <Switch>
+                    <Route path="/" exact component={Home}></Route>
+                    <Route path="/launches" component={Launches}></Route>
+                  </Switch>
                 </Box>
-              </Box>
+              </Router>
             </Box>
           )}
         </ResponsiveContext.Consumer>

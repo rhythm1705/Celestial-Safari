@@ -1,16 +1,8 @@
 import React from "react";
-import SignUp from "./signUpLogIn/SignUp";
-import SignIn from "./signUpLogIn/SignIn";
-import {
-  Box,
-  Button,
-  Heading,
-  Layer,
-  Grommet,
-  Tab,
-  Tabs
-} from "grommet";
-
+import { FormClose } from "grommet-icons";
+import SignUp from "../signUpLogIn/SignUp";
+import SignIn from "../signUpLogIn/SignIn";
+import { Box, Button, Heading, Layer, Grommet, Tab, Tabs } from "grommet";
 
 function SignUpAndLogIn(props) {
   return (
@@ -24,11 +16,13 @@ function SignUpAndLogIn(props) {
         >
           <Box pad="medium" gap="small" width="medium">
             <Heading level={3} margin="none">
-              SignUp / LogIn
+              SignUp / LogIn!
               <Button
-                label="Cancel"
+                icon={<FormClose size="medium"/>}
                 onClick={() => props.invisible()}
                 margin="small"
+                color="status-critical"
+                alignSelf="end"
               />
             </Heading>
             <Tabs>

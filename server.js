@@ -5,6 +5,7 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const cors = require("cors");
 const collections = require("./routes/api/collections");
+const path = require("path");
 const app = express();
 
 app.use(cors());
@@ -35,6 +36,13 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("api/collections", collections);
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, "client/build")));
+// Anything that doesn't match the above, send back index.html
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 // Listen for requests
 const port = process.env.PORT || 5000; // process.env.port is Heroku's port if you choose to deploy the app there

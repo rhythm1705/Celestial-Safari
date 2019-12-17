@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Form, FormField, Collapsible, Text } from "grommet";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../actions/authActions";
+import { loginUser } from "../../actions/authActions";
 
 function SignIn() {
 	const [loading, setLoading] = useState(false);

@@ -6,7 +6,10 @@ const users = require("./routes/api/users");
 const cors = require("cors");
 const collections = require("./routes/api/collections");
 const path = require("path");
+const dotenv = require("dotenv");
 const app = express();
+
+dotenv.config({ path: "./.env" });
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -21,12 +24,12 @@ app.use(
 );
 app.use(bodyParser.json());
 
-// DB Config
-const db = require("./config/keys").mongoURI;
-
 // Connect to MongoDB
 mongoose
-	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+	.connect(process.env.DB_CONNECT, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	})
 	.then(() => console.log("MongoDB successfully connected"))
 	.catch(err => console.log(err));
 

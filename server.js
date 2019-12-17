@@ -9,6 +9,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const app = express();
 
+// Config dotenv
 dotenv.config({ path: "./.env" });
 
 // Serve static files from the React frontend app

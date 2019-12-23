@@ -15,7 +15,7 @@ function AppBar(props) {
   const [openSignUp, setOpenSignUp] = useState(undefined);
   const [openSidebar, setOpenSidebar] = useState(undefined);
 
-  // SignUp / Sign In layer visibility
+  // SignUp / SignIn layer visibility
   const invisible = () => {
     return () => {
       setOpenSignUp(undefined);

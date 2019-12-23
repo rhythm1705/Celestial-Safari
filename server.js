@@ -42,7 +42,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
-app.use("api/collections", collections);
+app.use("/api/collections", collections);
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {

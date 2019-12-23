@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Button, Layer, Text } from "grommet";
 import { Add, Calendar, FormClose, Launch, Home } from "grommet-icons";
 import { Link } from "react-router-dom";
-import "../index.css";
 import { useSelector } from "react-redux";
 
 function Sidebar(props) {
@@ -46,12 +45,20 @@ function Sidebar(props) {
 									label="Home"
 								/>
 							</Link>
-							<Link to="/launches">
+							<Link to="/launches/past">
 								<Button
 									plain
 									hoverIndicator
 									icon={<Launch />}
-									label="Launches"
+									label="Past Launches"
+								/>
+							</Link>
+							<Link to="/launches/upcoming">
+								<Button
+									plain
+									hoverIndicator
+									icon={<Launch />}
+									label="Upcoming Launches"
 								/>
 							</Link>
 							<Link to="/calendar">

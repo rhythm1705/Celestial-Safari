@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid, InfiniteScroll } from "grommet";
+import { Box, Grid, InfiniteScroll, ResponsiveContext } from "grommet";
 import Card from "../../reusables/Card";
 import Spinner from "../../reusables/Spinner";
 import { external as axios } from "../../utils/externalAxios";
 
 function Past() {
 	const [pastLaunches, setPastLaunches] = useState([]);
+	const size = React.useContext(ResponsiveContext);
 
 	useEffect(() => {
 		const fetchPast = async () => {
@@ -41,13 +42,18 @@ function Past() {
 			fetchPast();
 		}
 	}, [pastLaunches]);
+
 	return (
 		<>
 			{pastLaunches.length === 0 ? (
 				<Spinner></Spinner>
 			) : (
 				<Grid columns="medium" gap="small">
-					<InfiniteScroll items={pastLaunches} step={10}>
+					<InfiniteScroll
+						items={pastLaunches}
+						step={10}
+						{...(size === "small" && { replace: true })}
+					>
 						{pastLaunch => (
 							<React.Fragment key={pastLaunch.props.itemId}>
 								{pastLaunch}

@@ -22,7 +22,7 @@ function News() {
 			});
 	};
 	return (
-		<Box>
+		<>
 			{NewsList.length === 0 ? (
 				<Spinner></Spinner>
 			) : (
@@ -39,7 +39,7 @@ function News() {
 					))}
 				</Box>
 			)}
-		</Box>
+		</>
 	);
 }
 

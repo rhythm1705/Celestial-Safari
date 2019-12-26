@@ -4,7 +4,7 @@ import News from "./News";
 
 function Home() {
 	return (
-		<Box>
+		<Box flex={false} pad="medium">
 			<News></News>
 		</Box>
 	);

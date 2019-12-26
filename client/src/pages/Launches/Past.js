@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid } from "grommet";
+import { Box, Grid, InfiniteScroll } from "grommet";
 import Card from "../../reusables/Card";
 import Spinner from "../../reusables/Spinner";
 import { external as axios } from "../../utils/externalAxios";
@@ -42,15 +42,21 @@ function Past() {
 		}
 	}, [pastLaunches]);
 	return (
-		<Box>
+		<>
 			{pastLaunches.length === 0 ? (
 				<Spinner></Spinner>
 			) : (
 				<Grid columns="medium" gap="small">
-					{pastLaunches}
+					<InfiniteScroll items={pastLaunches} step={10}>
+						{pastLaunch => (
+							<React.Fragment key={pastLaunch.props.itemId}>
+								{pastLaunch}
+							</React.Fragment>
+						)}
+					</InfiniteScroll>
 				</Grid>
 			)}
-		</Box>
+		</>
 	);
 }
 

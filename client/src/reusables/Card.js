@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Box, Button, Text } from "grommet";
+import { Box, Button, DropButton, List, Text } from "grommet";
 import { Calendar, Location } from "grommet-icons";
 import InfoPage from "./InfoPage";
+import { useSelector } from "react-redux";
 
 function Card(props) {
 	const [infoPage, setInfoPage] = useState(false);
+	const [selectedCollections, setSelectedCollections] = useState();
+	const auth = useSelector(state => state.auth);
 
 	const viewInfoPage = () => {
 		return () => {
@@ -20,12 +23,13 @@ function Card(props) {
 		<Box
 			border
 			animation="slideUp"
-			pad="small"
 			margin="small"
 			align="center"
 			round
 			gap="small"
 			background={background}
+			justify="between"
+			pad="small"
 		>
 			<Text size="xlarge" textAlign="center">
 				{props.title}
@@ -41,15 +45,36 @@ function Card(props) {
 				{props.date}
 			</Text>
 			<Box direction="row" gap="medium">
-				<Button
-					alignSelf="stretch"
-					label="Add to collection"
-					fill="horizontal"
-					onClick={() => {
-						alert("added");
-					}}
-					primary
-				/>
+				{auth.isAuthenticated && (
+					<DropButton
+						alignSelf="stretch"
+						label="Add to collection"
+						fill="horizontal"
+						dropAlign={{ top: "bottom", right: "right" }}
+						dropContent={
+							<Box pad="small" gap="small">
+								<Button
+									alignSelf="stretch"
+									label="New Collection"
+									fill="horizontal"
+									onClick={() => {}}
+									primary
+								/>
+								<List
+									data={["collection1", "collection2"]}
+									onClickItem={event =>
+										setSelectedCollections(
+											selectedCollections === event.index
+												? undefined
+												: event.index
+										)
+									}
+								/>
+							</Box>
+						}
+						primary
+					/>
+				)}
 				<Button
 					alignSelf="stretch"
 					label="Info"

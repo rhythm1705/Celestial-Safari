@@ -1,6 +1,8 @@
-import React from "react";
-import { Box, Grommet, ResponsiveContext } from "grommet";
+import React, { useState } from "react";
+import { Box, Grommet, ResponsiveContext, Grid } from "grommet";
 import AppBar from "./components/AppBar";
+import Sidebar from "./components/Sidebar";
+
 import Home from "./pages/Home/Home";
 import Upcoming from "./pages/Launches/Upcoming";
 import Past from "./pages/Launches/Past";
@@ -30,36 +32,58 @@ if (localStorage.jwtToken) {
 }
 
 function App() {
+	const [openSidebar, setOpenSidebar] = useState(undefined);
+
+	const showSidebar = () => {
+		return () => {
+			setOpenSidebar(!openSidebar);
+		};
+	};
+
 	return (
 		<Provider store={store}>
-			<Grommet theme={theme}>
-				<ResponsiveContext.Consumer>
-					{size => (
-						<Box fill>
-							<Router>
-								<AppBar> </AppBar>
-								<Box>
-									<Switch>
-										<Route
-											path="/"
-											exact
-											component={Home}
-										></Route>
-										<Route
-											path="/launches/past"
-											component={Past}
-										></Route>
-										<Route
-											path="/launches/upcoming"
-											component={Upcoming}
-										></Route>
-									</Switch>
-								</Box>
-							</Router>
+			<Router>
+				<Grommet theme={theme} full>
+					<Grid
+						fill
+						rows={["auto", "flex"]}
+						columns={["auto", "flex"]}
+						areas={[
+							{ name: "appbar", start: [0, 0], end: [1, 0] },
+							{ name: "sidebar", start: [0, 1], end: [0, 1] },
+							{ name: "main", start: [1, 1], end: [1, 1] }
+						]}
+					>
+						<AppBar setSidebar={showSidebar()} gridArea="appbar" />
+						<Box
+							gridArea="sidebar"
+							overflow="auto"
+							flex
+							background={{ color: "light-2" }}
+						>
+							{openSidebar && (
+								<Sidebar
+									setSidebar={showSidebar()}
+									open={openSidebar}
+								></Sidebar>
+							)}
 						</Box>
-					)}
-				</ResponsiveContext.Consumer>
-			</Grommet>
+						<Box gridArea="main" overflow="auto">
+							<Switch>
+								<Route path="/" exact component={Home}></Route>
+								<Route
+									path="/launches/past"
+									component={Past}
+								></Route>
+								<Route
+									path="/launches/upcoming"
+									component={Upcoming}
+								></Route>
+							</Switch>
+						</Box>
+					</Grid>
+				</Grommet>
+			</Router>
 		</Provider>
 	);
 }

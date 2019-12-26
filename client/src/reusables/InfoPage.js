@@ -50,7 +50,7 @@ function InfoPage(props) {
 		<>
 			{props.showInfoPage && itemData.length !== 0 && (
 				<Layer full animation="fadeIn">
-					<Box fill>
+					<Box fill pad="medium">
 						<Box>
 							<Box>
 								<Box
@@ -93,7 +93,23 @@ function InfoPage(props) {
 										))}
 									</Box>
 								</Tab>
-								<Tab title="Missions"></Tab>
+								<Tab title="Missions">
+									<Box
+										fill
+										overflow="auto"
+										pad="small"
+										align="center"
+									>
+										{itemData[0].missions.map(mission => (
+											<Box key={mission.id}>
+												<Text>{mission.name}</Text>
+												<Text>
+													{mission.description}
+												</Text>
+											</Box>
+										))}
+									</Box>
+								</Tab>
 							</Tabs>
 						</Box>
 					</Box>

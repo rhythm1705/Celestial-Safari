@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid } from "grommet";
+import { Box, Grid, InfiniteScroll } from "grommet";
 import Card from "../../reusables/Card";
 import Spinner from "../../reusables/Spinner";
 import { external as axios } from "../../utils/externalAxios";
@@ -46,17 +46,22 @@ function Upcoming() {
 		}
 	}, [upcomingLaunches]);
 
-
 	return (
-		<Box>
+		<>
 			{upcomingLaunches.length === 0 ? (
 				<Spinner></Spinner>
 			) : (
 				<Grid columns="medium" gap="small">
-					{upcomingLaunches}
+					<InfiniteScroll items={upcomingLaunches} step={20}>
+						{upcomingLaunch => (
+							<React.Fragment key={upcomingLaunch.props.itemId}>
+								{upcomingLaunch}
+							</React.Fragment>
+						)}
+					</InfiniteScroll>
 				</Grid>
 			)}
-		</Box>
+		</>
 	);
 }
 

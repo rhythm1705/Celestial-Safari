@@ -16,9 +16,21 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Learn more
 
+#### Technologies:
+
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 To learn Express, check out the [Express documentation](http://expressjs.com/).
+
+To learn Axios, check out the [Axios repository](https://github.com/axios/axios).
+
+Check out the [Grommet UI library](https://v2.grommet.io/).
+
+#### APIs used:
+
+[Launch Library](https://launchlibrary.net/docs/1.4.1/api.html)
+
+[Spaceflight News](https://spaceflightnewsapi.net/api/v1/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

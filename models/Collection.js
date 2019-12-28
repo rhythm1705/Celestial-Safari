@@ -4,16 +4,20 @@ const Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 // Create Schema
 const CollectionSchema = new Schema({
-    owner: {
-        type: ObjectId,
-        ref: "User",
-        required: true
-    },
+	name: {
+		type: String,
+		required: true
+	},
+	owner: {
+		type: ObjectId,
+		ref: "User",
+		required: true
+	},
 	upcomingLaunches: {
-		type: [Number],
+		type: [Number]
 	},
 	pastLaunches: {
-		type: [Number],
-    }
+		type: [Number]
+	}
 });
 module.exports = Collection = mongoose.model("collections", CollectionSchema);

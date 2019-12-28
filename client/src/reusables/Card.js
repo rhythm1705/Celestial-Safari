@@ -1,13 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, DropButton, List, Text } from "grommet";
 import { Calendar, Location } from "grommet-icons";
 import InfoPage from "./InfoPage";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function Card(props) {
 	const [infoPage, setInfoPage] = useState(false);
 	const [selectedCollections, setSelectedCollections] = useState();
+	const [userCollections, setUserCollections] = useState([]);
 	const auth = useSelector(state => state.auth);
+	// console.log("auth.user.id", auth.user.id);
+
+	useEffect(() => {
+		const getUserCollections = () => {
+			axios
+				.get("/api/collections/owner/" + auth.user.id)
+				.then(res => {
+					// console.log(
+					// 	"res User Collections",
+					// 	res.data.map(collection => collection.name)
+					// );
+					setUserCollections(res.data);
+				})
+				.catch(err => {
+					console.log("err", err);
+				});
+		};
+		if (auth.isAuthenticated && userCollections.length === 0) {
+			getUserCollections();
+		}
+	}, [auth.isAuthenticated, userCollections]);
 
 	const viewInfoPage = () => {
 		return () => {
@@ -61,7 +84,9 @@ function Card(props) {
 									primary
 								/>
 								<List
-									data={["collection1", "collection2"]}
+									data={userCollections.map(
+										collection => collection.name
+									)}
 									onClickItem={event =>
 										setSelectedCollections(
 											selectedCollections === event.index

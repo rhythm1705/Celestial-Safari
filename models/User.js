@@ -16,10 +16,6 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	user_collection: {
-		type: ObjectId,
-		ref: "Collection"
-	},
 	date: {
 		type: Date,
 		default: Date.now

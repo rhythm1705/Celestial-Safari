@@ -7,7 +7,7 @@ import {
 	Collapsible,
 	ResponsiveContext
 } from "grommet";
-import { Add, Calendar, FormClose, Launch, Home } from "grommet-icons";
+import { Add,  FormClose, Launch, Home, Organization } from "grommet-icons";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -69,12 +69,12 @@ function Sidebar(props) {
 						onClick={() => size === "small" && props.setSidebar()}
 					/>
 				</Link>
-				<Link to="/calendar">
+				<Link to="/agencies">
 					<Button
 						plain
 						hoverIndicator
-						icon={<Calendar />}
-						label="Calendar"
+						icon={<Organization />}
+						label="Agencies"
 						onClick={() => size === "small" && props.setSidebar()}
 					/>
 				</Link>

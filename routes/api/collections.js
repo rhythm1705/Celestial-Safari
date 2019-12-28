@@ -17,19 +17,9 @@ router.post("/", (req, res, next) => {
 router.patch("/add/:id", (req, res, next) => {
 	Collection.findById(req.params.id)
 		.then(collection => {
-			const pastLaunchId = req.body.past;
-			const upcomingLaunchId = req.body.upcoming;
-			if (
-				pastLaunchId &&
-				!collection.pastLaunches.includes(pastLaunchId)
-			) {
-				collection.pastLaunches.push(pastLaunchId);
-			}
-			if (
-				upcomingLaunchId &&
-				!collection.upcomingLaunches.includes(upcomingLaunchId)
-			) {
-				collection.upcomingLaunches.push(upcomingLaunchId);
+			const launchId = req.body.launch;
+			if (launchId && !collection.launches.includes(launchId)) {
+				collection.launches.push(launchId);
 			}
 			collection
 				.save()
@@ -43,19 +33,11 @@ router.patch("/add/:id", (req, res, next) => {
 router.patch("/remove/:id", (req, res, next) => {
 	Collection.findById(req.params.id)
 		.then(collection => {
-			const pastLaunchId = req.body.past;
-			const upcomingLaunchId = req.body.upcoming;
-			if (collection.pastLaunches.includes(pastLaunchId)) {
-				collection.pastLaunches = collection.pastLaunches.filter(id => {
-					id != pastLaunchId;
+			const launchId = req.body.launch;
+			if (collection.launches.includes(launchId)) {
+				collection.launches = collection.launches.filter(id => {
+					return id != launchId;
 				});
-			}
-			if (collection.upcomingLaunches.includes(upcomingLaunchId)) {
-				collection.upcomingLaunches = collection.upcomingLaunches.filter(
-					id => {
-						id != upcomingLaunchId;
-					}
-				);
 			}
 			collection
 				.save()

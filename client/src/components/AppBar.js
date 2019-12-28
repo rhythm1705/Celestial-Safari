@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, Grid, Heading } from "grommet";
 import { FormUpload, Menu } from "grommet-icons";
 import SignUpAndLogIn from "./SignUpAndLogIn";
-import Sidebar from "./Sidebar";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 

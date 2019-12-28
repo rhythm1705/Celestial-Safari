@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Box, Grommet, ResponsiveContext, Grid } from "grommet";
+import { Box, Grommet, Grid } from "grommet";
 import AppBar from "./components/AppBar";
 import Sidebar from "./components/Sidebar";
-
 import Home from "./pages/Home/Home";
 import Upcoming from "./pages/Launches/Upcoming";
 import Past from "./pages/Launches/Past";
+import MyCollections from "./pages/MyCollections/MyCollections";
 import theme from "./Theme";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -13,6 +13,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MyCollection from "./pages/MyCollections/MyCollections";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -78,6 +79,10 @@ function App() {
 								<Route
 									path="/launches/upcoming"
 									component={Upcoming}
+								></Route>
+								<Route
+									path="/my_collections"
+									component={MyCollections}
 								></Route>
 							</Switch>
 						</Box>

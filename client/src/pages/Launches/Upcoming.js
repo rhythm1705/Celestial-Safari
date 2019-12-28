@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid, InfiniteScroll } from "grommet";
+import { Grid, InfiniteScroll } from "grommet";
 import Card from "../../reusables/Card";
 import Spinner from "../../reusables/Spinner";
 import { external as axios } from "../../utils/externalAxios";

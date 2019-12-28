@@ -13,10 +13,7 @@ const CollectionSchema = new Schema({
 		ref: "User",
 		required: true
 	},
-	upcomingLaunches: {
-		type: [Number]
-	},
-	pastLaunches: {
+	launches: {
 		type: [Number]
 	}
 });

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, Text, Heading, Layer, Tab, Tabs, Image } from "grommet";
 import { FormClose } from "grommet-icons";
 import NewsCard from "./NewsCard";
-import { external as axios } from "./../utils/externalAxios";
+import { external as axios } from "../utils/externalAxios";
 
 function InfoPage(props) {
 	const [itemData, setItemData] = useState([]);

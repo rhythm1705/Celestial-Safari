@@ -1,7 +1,7 @@
 import React from "react";
 import { FormClose } from "grommet-icons";
-import SignUp from "./signUpLogIn/SignUp";
-import SignIn from "./signUpLogIn/SignIn";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 import { Box, Button, Heading, Layer, Grommet, Tab, Tabs } from "grommet";
 
 function SignUpAndLogIn(props) {

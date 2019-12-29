@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, InfiniteScroll, Grid, Select, Tabs, Tab } from "grommet";
-import Card from "../../reusables/Card";
-import NewCollection from "../../reusables/NewCollection";
+import Card from "../../components/Card";
+import NewCollection from "../../components/NewCollection";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { external as externalAxios } from "../../utils/externalAxios";
@@ -131,12 +131,7 @@ function MyCollections() {
 						{selectedCollection.launches.length > 0 &&
 							launches.length !== 0 && (
 								<Tab title="Launches">
-									<Box
-										fill
-										overflow="auto"
-										pad="small"
-										align="center"
-									>
+									<Box fill overflow="auto" pad="small">
 										<Grid columns="medium" gap="small">
 											<InfiniteScroll
 												items={launches}

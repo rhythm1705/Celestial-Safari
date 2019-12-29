@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "grommet";
 import { external as axios } from "../../utils/externalAxios";
-import Spinner from "../../reusables/Spinner";
-import NewsCard from "../../reusables/NewsCard";
+import Spinner from "../../components/Spinner";
+import NewsCard from "../../components/NewsCard";
 
 function News() {
 	const [NewsList, setNewsList] = useState([]);

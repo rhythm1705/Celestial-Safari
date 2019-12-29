@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, InfiniteScroll, ResponsiveContext } from "grommet";
-import Card from "../../reusables/Card";
-import Spinner from "../../reusables/Spinner";
+import Card from "../../components/Card";
+import Spinner from "../../components/Spinner";
 import { external as axios } from "../../utils/externalAxios";
 
 function Past() {

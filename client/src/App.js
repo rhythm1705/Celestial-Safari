@@ -13,7 +13,6 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import MyCollection from "./pages/MyCollections/MyCollections";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {

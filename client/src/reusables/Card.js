@@ -3,10 +3,14 @@ import { Box, Button, DropButton, Text } from "grommet";
 import { Calendar, Location } from "grommet-icons";
 import InfoPage from "./InfoPage";
 import AddToCollection from "./AddToCollection";
+import NewCollection from "./NewCollection";
 import { useSelector } from "react-redux";
 
 function Card(props) {
 	const [infoPage, setInfoPage] = useState(false);
+	const [newCollection, setNewCollection] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
+
 	const auth = useSelector(state => state.auth);
 
 	const viewInfoPage = () => {
@@ -14,7 +18,16 @@ function Card(props) {
 			setInfoPage(!infoPage);
 		};
 	};
-
+	const toggleNewCollection = () => {
+		return () => {
+			setNewCollection(!newCollection);
+		};
+	};
+	const toggleDropdown = () => {
+		return () => {
+			setShowDropdown(!showDropdown);
+		};
+	};
 	const img = "url(" + props.backgroundImg + ")";
 	const background = {
 		image: img
@@ -55,14 +68,27 @@ function Card(props) {
 							right: "right"
 						}}
 						dropContent={
-							<AddToCollection
-								itemId={props.itemId}
-								type="launch"
-							></AddToCollection>
+							<>
+								<AddToCollection
+									itemId={props.itemId}
+									type="launch"
+									showNewCollection={toggleNewCollection()}
+									hideDropContent={toggleDropdown()}
+								></AddToCollection>
+							</>
 						}
+						onOpen={toggleDropdown()}
+						onClose={toggleDropdown()}
+						open={showDropdown}
 						primary
 					/>
 				)}
+				<NewCollection
+					invisible={toggleNewCollection()}
+					open={newCollection}
+					type="launch"
+					itemId={props.itemId}
+				></NewCollection>
 				<Button
 					alignSelf="stretch"
 					label="Info"

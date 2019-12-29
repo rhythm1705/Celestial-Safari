@@ -5,15 +5,11 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 function Collection(props) {
-	const [inCollection, setInCollection] = useState(false);
-	useEffect(() => {
-		if (
-			props.type === "launch" &&
-			props.data.launches.includes(props.itemId)
-		) {
-			setInCollection(true);
-		}
-	}, [props.data.launches, props.itemId, props.type, inCollection]);
+	let initialBol = false;
+	if (props.type === "launch" && props.data.launches.includes(props.itemId)) {
+		initialBol = true;
+	}
+	const [inCollection, setInCollection] = useState(initialBol);
 	const addLaunchToCollection = e => {
 		if (!inCollection) {
 			axios
@@ -83,7 +79,10 @@ function AddToCollection(props) {
 				alignSelf="stretch"
 				label="New Collection"
 				fill="horizontal"
-				onClick={() => {}}
+				onClick={() => {
+					props.showNewCollection();
+					props.hideDropContent();
+				}}
 				primary
 			/>
 			{userCollections &&

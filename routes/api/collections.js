@@ -13,6 +13,15 @@ router.post("/", (req, res, next) => {
 		.catch(next);
 });
 
+// Delete a collection by id
+router.delete("/:id", (req, res, next) => {
+	Collection.findByIdAndRemove(req.params.id)
+		.then(collection => {
+			res.send(collection);
+		})
+		.catch(next);
+});
+
 // Add an item to a collection
 router.patch("/add/:id", (req, res, next) => {
 	Collection.findById(req.params.id)

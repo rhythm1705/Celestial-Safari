@@ -74,6 +74,7 @@ function Card(props) {
 									type="launch"
 									showNewCollection={toggleNewCollection()}
 									hideDropContent={toggleDropdown()}
+									onChange={props.onChange}
 								></AddToCollection>
 							</>
 						}

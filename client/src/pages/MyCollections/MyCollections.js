@@ -28,16 +28,29 @@ function MyCollections() {
 		};
 		if (!collections) {
 			getUserCollections();
+		} else if (selectedCollection.name !== "Select a Collection") {
+			setSelectedCollection(
+				collections.filter(
+					collection => collection._id === selectedCollection._id
+				)[0]
+			);
 		}
+
 		console.log("Running collections useeffect");
-	}, [collections, auth.user.id]);
+	}, [collections, auth.user.id, selectedCollection]);
 
 	useEffect(() => {
+		const onChange = () => {
+			return () => {
+				console.log("onChange");
+				setCollections(undefined);
+				// console.log("collections here", collections);
+			};
+		};
 		const getLaunches = async () => {
-			console.log(
-				"selectedCollection.launches",
-				selectedCollection.launches
-			);
+			console.log("Running getLaunches");
+			console.log("selectedCollection", selectedCollection);
+
 			const launchesData = selectedCollection.launches.map(
 				async launch => {
 					const response = await externalAxios.get(
@@ -53,6 +66,7 @@ function MyCollections() {
 							location={launchData.location.name}
 							date={launchData.net}
 							backgroundImg={launchData.rocket.imageURL}
+							onChange={onChange()}
 						/>
 					);
 				}
@@ -62,7 +76,6 @@ function MyCollections() {
 		};
 		if (selectedCollection.launches) {
 			getLaunches();
-			console.log("Running getLaunches");
 		}
 		console.log("Running launch useeffect");
 	}, [selectedCollection]);

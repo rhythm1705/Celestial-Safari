@@ -43,6 +43,9 @@ function Collection(props) {
 			onClick={() => {
 				props.type === "launch" &&
 					addLaunchToCollection([props.id, props.itemId]);
+				if (props.onChange) {
+					props.onChange();
+				}
 			}}
 		>
 			<Box pad="small" direction="row" align="center" gap="small">
@@ -95,6 +98,7 @@ function AddToCollection(props) {
 							id={collection._id}
 							itemId={props.itemId}
 							data={collection}
+							onChange={props.onChange}
 						></Collection>
 					);
 				})}

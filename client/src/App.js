@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grommet, Grid } from "grommet";
 import AppBar from "./components/AppBar";
 import Sidebar from "./components/Sidebar";
@@ -6,7 +6,8 @@ import Home from "./pages/Home/Home";
 import Upcoming from "./pages/Launches/Upcoming";
 import Past from "./pages/Launches/Past";
 import MyCollections from "./pages/MyCollections/MyCollections";
-import theme from "./Theme";
+import Theme from "./Theme";
+import "./index.css";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -33,6 +34,33 @@ if (localStorage.jwtToken) {
 
 function App() {
 	const [openSidebar, setOpenSidebar] = useState(undefined);
+	const [theme, setTheme] = useState(
+		window.localStorage.getItem("theme") || "light"
+	);
+
+	const setMode = mode => {
+		window.localStorage.setItem("theme", mode);
+		setTheme(mode);
+	};
+
+	const toggleTheme = () => {
+		if (theme === "light") {
+			setMode("dark");
+		} else {
+			setMode("light");
+		}
+	};
+
+	useEffect(() => {
+		const localTheme = window.localStorage.getItem("theme");
+		window.matchMedia &&
+		window.matchMedia("(prefers-color-scheme: dark)").matches &&
+		!localTheme
+			? setMode("dark")
+			: localTheme
+			? setTheme(localTheme)
+			: setMode("light");
+	}, []);
 
 	const showSidebar = () => {
 		return () => {
@@ -43,7 +71,7 @@ function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<Grommet theme={theme} full>
+				<Grommet theme={Theme} full themeMode={theme}>
 					<Grid
 						fill
 						rows={["auto", "flex"]}
@@ -54,12 +82,17 @@ function App() {
 							{ name: "main", start: [1, 1], end: [1, 1] }
 						]}
 					>
-						<AppBar setSidebar={showSidebar()} gridArea="appbar" />
+						<AppBar
+							setSidebar={showSidebar()}
+							gridArea="appbar"
+							setTheme={toggleTheme}
+							curTheme={theme}
+						/>
 						<Box
 							gridArea="sidebar"
 							overflow="auto"
 							flex
-							background={{ color: "light-2" }}
+							background={{ color: "background-contrast" }}
 						>
 							{openSidebar && (
 								<Sidebar

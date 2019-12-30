@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Grid, Heading } from "grommet";
 import { FormUpload, Menu } from "grommet-icons";
+import { Brightness5, Brightness2 } from "@material-ui/icons";
 import SignUpAndLogIn from "./signUpLogIn/SignUpAndLogIn";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../actions/authActions";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 
 const buttonStyle = {
 	display: "inline - block",
@@ -38,7 +41,7 @@ function AppBar(props) {
 			justify="between"
 			background="brand"
 			pad="small"
-			elevation="medium"
+			// elevation="medium"
 			style={{ zIndex: "1" }}
 			margin="none"
 			flex={false}
@@ -58,12 +61,22 @@ function AppBar(props) {
 						icon={<Menu />}
 						onClick={() => props.setSidebar()}
 					/>
-					<Heading level="2" margin="none">
+					<Heading
+						level="3"
+						margin="none"
+						color="text-strong"
+						alignSelf="center"
+					>
 						Celestial Safari
 					</Heading>
 				</Box>
 
-				<Box gridArea="user">
+				<Box
+					gridArea="user"
+					direction="row"
+					align="center"
+					justify="between"
+				>
 					{auth.isAuthenticated ? (
 						<>
 							<Button
@@ -88,7 +101,41 @@ function AppBar(props) {
 							style={buttonStyle}
 						/>
 					)}
+					<Toggle
+						icons={{
+							unchecked: (
+								<Brightness5
+									style={{
+										color: "orange",
+										position: "absolute",
+										top: "-5px",
+										left: "-4px",
+										width: "20px",
+										height: "20px"
+									}}
+									fontSize="small"
+								/>
+							),
+							checked: (
+								<Brightness2
+									style={{
+										color: "#FFE082",
+										position: "absolute",
+										top: "-5px",
+										left: "-4px",
+										width: "20px",
+										height: "20px"
+									}}
+									fontSize="small"
+								/>
+							)
+						}}
+						checked={props.curTheme === "dark" ? true : false}
+						onChange={props.setTheme}
+						className="dark-mode-toggle"
+					/>
 				</Box>
+
 				<SignUpAndLogIn
 					invisible={invisible()}
 					open={openSignUp}

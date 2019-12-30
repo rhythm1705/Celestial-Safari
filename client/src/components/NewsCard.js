@@ -11,7 +11,6 @@ function NewsCard(props) {
 				size: "xsmall"
 			}}
 			border="all"
-			elevation="medium"
 			height={{ min: "small", max: "small" }}
 			fill="horizontal"
 			margin="small"

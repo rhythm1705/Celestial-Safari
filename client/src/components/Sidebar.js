@@ -4,10 +4,11 @@ import {
 	Button,
 	Layer,
 	Text,
+	Heading,
 	Collapsible,
 	ResponsiveContext
 } from "grommet";
-import { Add,  FormClose, Launch, Home, Organization } from "grommet-icons";
+import { Add, FormClose, Launch, Home, Organization } from "grommet-icons";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -22,15 +23,19 @@ function Sidebar(props) {
 			<Box
 				direction="row"
 				align="center"
-				as="header"
-				elevation="medium"
 				justify="between"
+				fill="horizontal"
 			>
-				{auth.isAuthenticated ? (
-					<Text size="large">Hi {auth.user.name}!</Text>
-				) : (
-					<Text size="large">Not logged in.</Text>
-				)}
+				<Heading
+					margin="small"
+					level="3"
+					color="text"
+					textAlign="center"
+				>
+					{auth.isAuthenticated
+						? "Hi" + auth.user.name + "!"
+						: "Not logged in."}
+				</Heading>
 				{size === "small" && (
 					<Box align="end">
 						<Button
@@ -69,7 +74,7 @@ function Sidebar(props) {
 						onClick={() => size === "small" && props.setSidebar()}
 					/>
 				</Link>
-				<Link to="/agencies">
+				{/* <Link to="/agencies">
 					<Button
 						plain
 						hoverIndicator
@@ -77,7 +82,7 @@ function Sidebar(props) {
 						label="Agencies"
 						onClick={() => size === "small" && props.setSidebar()}
 					/>
-				</Link>
+				</Link> */}
 				{auth.isAuthenticated && (
 					<Link to="/my_collections">
 						<Button

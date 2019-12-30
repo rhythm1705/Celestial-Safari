@@ -1,0 +1,20 @@
+.dark-mode-toggle.react-toggle--checked .react-toggle-track {
+	background-color: black;
+}
+
+.dark-mode-toggle .react-toggle-track {
+	background-color: white;
+}
+
+.dark-mode-toggle .react-toggle-thumb {
+	background-color: rgb(111, 255, 176);
+}
+
+.dark-mode-toggle.react-toggle--checked:hover:not(.react-toggle--disabled)
+	.react-toggle-track {
+	background-color: black;
+}
+
+.dark-mode-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+	background-color: white;
+}

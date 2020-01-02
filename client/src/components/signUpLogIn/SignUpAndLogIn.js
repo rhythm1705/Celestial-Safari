@@ -9,7 +9,8 @@ function SignUpAndLogIn(props) {
 		<>
 			{props.open && (
 				<Layer
-					position="center"
+					position="right"
+					full="vertical"
 					onClickOutside={() => props.invisible()}
 					onEsc={() => props.invisible()}
 				>
@@ -17,7 +18,7 @@ function SignUpAndLogIn(props) {
 						pad="medium"
 						gap="small"
 						width={{ min: "medium" }}
-						height={{ min: "large" }}
+						fill
 					>
 						<Box direction="row" align="center" justify="between">
 							<Heading level="3" margin="small" color="text">

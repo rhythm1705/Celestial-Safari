@@ -36,7 +36,7 @@ function LaunchCard(props) {
 			align="center"
 			round
 			gap="small"
-			justify="evenly"
+			justify="between"
 			pad="small"
 			direction="row"
 		>
@@ -48,20 +48,37 @@ function LaunchCard(props) {
 			>
 				<Image src={props.img} fill fit="cover"></Image>
 			</Box>
-			<Box>
-				<Text size="xlarge" textAlign="center">
-					{props.title}
-				</Text>
+			<Box alignSelf="start" fill justify="between">
+				<Text size="xlarge">{props.title}</Text>
 				{props.location !== "" && (
-					<Text size="large" textAlign="center">
-						<Location></Location>
-						{props.location}
-					</Text>
+					<Box
+						pad={{
+							horizontal: "xsmall",
+							vertical: "xsmall"
+						}}
+						background={props.active ? "selected" : undefined}
+						direction="row"
+						align="center"
+						gap="small"
+					>
+						<Location size="medium" color="control" />
+						<Text size="medium">{props.location}</Text>
+					</Box>
 				)}
-				<Text size="large" textAlign="center">
-					<Calendar></Calendar>
-					{props.date}
-				</Text>
+				<Box
+					pad={{
+						horizontal: "xsmall",
+						vertical: "xsmall"
+					}}
+					background={props.active ? "selected" : undefined}
+					direction="row"
+					align="center"
+					gap="small"
+				>
+					<Calendar size="medium" color="control" />
+					<Text size="medium">{props.date}</Text>
+				</Box>
+
 				<Box direction="row" gap="medium">
 					{auth.isAuthenticated && (
 						<DropButton
@@ -72,6 +89,7 @@ function LaunchCard(props) {
 								top: "bottom",
 								right: "right"
 							}}
+							dropProps={{ background: "blue" }}
 							dropContent={
 								<AddToCollection
 									itemId={props.itemId}

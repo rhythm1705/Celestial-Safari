@@ -95,6 +95,7 @@ function App() {
 							overflow="auto"
 							flex
 							elevation="medium"
+							style={{ zIndex: "9" }}
 						>
 							{openSidebar && (
 								<Sidebar

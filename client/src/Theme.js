@@ -502,13 +502,10 @@ const theme = {
 		}
 	},
 	tab: {
-		color: "textx-weak",
+		color: "text",
 		active: {
 			background: "brand",
 			color: "text-strong"
-		},
-		hover: {
-			color: "white"
 		},
 		border: undefined,
 		margin: undefined,

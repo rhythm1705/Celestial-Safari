@@ -39,7 +39,7 @@ function AppBar(props) {
 				align="center"
 				justify="between"
 				pad="small"
-				style={{ zIndex: "1" }}
+				style={{ zIndex: "9" }}
 				margin="none"
 				flex={false}
 				{...props}
@@ -81,7 +81,7 @@ function AppBar(props) {
 							color="text-strong"
 							alignSelf="center"
 						>
-							Celestial Safari
+							CELESTIAL SAFARI
 						</Heading>
 					</Box>
 

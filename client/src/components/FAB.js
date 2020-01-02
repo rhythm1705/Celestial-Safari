@@ -22,7 +22,7 @@ function FAB(props) {
 					<Box
 						round="full"
 						background="brand"
-						pad="small"
+						pad="medium"
 						elevation="medium"
 					>
 						<Burger

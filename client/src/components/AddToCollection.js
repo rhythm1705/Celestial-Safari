@@ -77,7 +77,7 @@ function AddToCollection(props) {
 	}, [auth.isAuthenticated, userCollections, auth.user.id]);
 
 	return (
-		<Box pad="small" gap="small">
+		<Box pad="small" gap="small" background="background-contrast" round>
 			<Button
 				alignSelf="stretch"
 				label="New Collection"

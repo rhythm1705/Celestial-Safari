@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, InfiniteScroll, Grid, Select, Tabs, Tab } from "grommet";
-import Card from "../../components/Card";
+import LaunchCard from "../../components/LaunchCard";
 import NewCollection from "../../components/NewCollection";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -59,13 +59,13 @@ function MyCollections() {
 					let launchData = response.data.launches[0];
 					console.log("launchData", launchData);
 					return (
-						<Card
+						<LaunchCard
 							key={launchData.id}
 							itemId={launchData.id}
 							title={launchData.name}
 							location={launchData.location.name}
 							date={launchData.net}
-							backgroundImg={launchData.rocket.imageURL}
+							img={launchData.rocket.imageURL}
 							onChange={onChange()}
 						/>
 					);

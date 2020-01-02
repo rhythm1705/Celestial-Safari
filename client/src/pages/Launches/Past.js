@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, InfiniteScroll, ResponsiveContext } from "grommet";
-import Card from "../../components/Card";
+import LaunchCard from "../../components/LaunchCard";
 import Spinner from "../../components/Spinner";
 import { external as axios } from "../../utils/externalAxios";
 
@@ -19,17 +19,27 @@ function Past() {
 				.get(
 					"https://launchlibrary.net/1.4/launch?startdate=1800-01-01&enddate=" +
 						today +
-						"&limit=10000"
+						"&limit=10000&fields=name,location,net,rocket"
 				)
 				.then(res => {
 					const pastLaunchesData = res.data.launches
 						.map(pastLaunch => {
+							let location = "";
+							let img = "";
+							if (pastLaunch.location !== undefined) {
+								location = pastLaunch.location.name;
+							}
+							if (pastLaunch.rocket !== undefined) {
+								img = pastLaunch.rocket.imageURL;
+							}
 							return (
-								<Card
+								<LaunchCard
 									key={pastLaunch.id}
 									itemId={pastLaunch.id}
 									title={pastLaunch.name}
 									date={pastLaunch.net}
+									location={location}
+									img={img}
 								/>
 							);
 						})
@@ -51,7 +61,7 @@ function Past() {
 				<Grid columns="medium" gap="small">
 					<InfiniteScroll
 						items={pastLaunches}
-						step={10}
+						step={5}
 						{...(size === "small" && { replace: true })}
 					>
 						{pastLaunch => (

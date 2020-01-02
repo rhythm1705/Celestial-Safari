@@ -12,12 +12,10 @@ function SignUp() {
 	const dispatch = useDispatch();
 
 	const error = useSelector(state => state.errors);
-	console.log(error);
+	console.log("sign up error", error);
 	useEffect(() => {
 		if (JSON.stringify(error) !== "{}") {
-			setMsg(JSON.stringify(error));
-		} else {
-			setMsg("Sign up successful.");
+			setMsg(error);
 		}
 	}, [error]);
 
@@ -30,50 +28,39 @@ function SignUp() {
 		setOpen(true);
 	};
 	return (
-		<>
-			<Form onReset={event => console.log(event)} onSubmit={handleSubmit}>
-				<FormField label="Name" name="name" required />
-				<FormField label="Email" name="email" type="email" required />
-				<FormField
-					label="Password"
-					name="password"
-					type="password"
-					required
-				/>
-				<FormField
-					label="Re-enter Password"
-					name="password2"
-					type="password"
-					required
-				/>
+		<Form onReset={event => console.log(event)} onSubmit={handleSubmit}>
+			<FormField label="Name" name="name" required />
+			<FormField label="Email" name="email" type="email" required />
+			<FormField
+				label="Password"
+				name="password"
+				type="password"
+				required
+			/>
+			<FormField
+				label="Re-enter Password"
+				name="password2"
+				type="password"
+				required
+			/>
+			<Button
+				margin="xsmall"
+				type="submit"
+				label={!loading ? "Sign Up" : "Signing Up..."}
+				primary
+			/>
+			<Collapsible open={open} direction="horizontal">
 				<Box
-					direction="row"
-					justify="between"
-					margin={{ top: "medium" }}
+					background="background-contrast"
+					pad="small"
+					align="center"
+					justify="center"
+					margin="small"
 				>
-					{loading ? (
-						<Button margin="xsmall" label="Signing Up.." disabled />
-					) : (
-						<Button
-							margin="xsmall"
-							type="submit"
-							label="Sign Up"
-							primary
-						/>
-					)}
-					<Collapsible open={open} direction="horizontal">
-						<Box
-							background="light-2"
-							pad="small"
-							align="center"
-							justify="center"
-						>
-							<Text>{msg}</Text>
-						</Box>
-					</Collapsible>
+					<Text color="text">{msg}</Text>
 				</Box>
-			</Form>
-		</>
+			</Collapsible>
+		</Form>
 	);
 }
 export default SignUp;

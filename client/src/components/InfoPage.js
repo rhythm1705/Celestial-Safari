@@ -73,7 +73,9 @@ function InfoPage(props) {
 						</Box>
 						<Box flex pad="xsmall">
 							<Tabs flex>
-								<Tab title="About">{about}</Tab>
+								<Tab title="About">
+									{about} {about === "" && "No info"}
+								</Tab>
 								<Tab title="Updates">
 									<Box
 										fill

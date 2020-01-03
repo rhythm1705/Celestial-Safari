@@ -35,8 +35,8 @@ Never made an open source contribution before? Wondering how contributions work 
 
 ## Where can I go for help?
 
-If you need help, you can ask questions on our mailing list, IRC chat, or [list any other communication platforms that your project uses].
+If you need help, you can ask questions by emailing me at rhythm.goel.17@outlook.com.
 
-##What does the Code of Conduct mean for me?
+## What does the Code of Conduct mean for me?
 
 Our Code of Conduct means that you are responsible for treating everyone on the project with respect and courtesy regardless of their identity. If you are the victim of any inappropriate behavior or comments as described in our Code of Conduct, we are here for you and will do the best to ensure that the abuser is reprimanded appropriately, per our code.

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Grommet, Grid } from "grommet";
 import AppBar from "./components/AppBar";
+import FAB from "./components/FAB";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home/Home";
 import Upcoming from "./pages/Launches/Upcoming";
@@ -87,12 +88,14 @@ function App() {
 							gridArea="appbar"
 							setTheme={toggleTheme}
 							curTheme={theme}
+							sidebar={openSidebar}
 						/>
 						<Box
 							gridArea="sidebar"
 							overflow="auto"
 							flex
-							background={{ color: "background-contrast" }}
+							elevation="medium"
+							style={{ zIndex: "9" }}
 						>
 							{openSidebar && (
 								<Sidebar
@@ -100,20 +103,24 @@ function App() {
 									open={openSidebar}
 								></Sidebar>
 							)}
+							<FAB
+								setSidebar={showSidebar()}
+								sidebar={openSidebar}
+							></FAB>
 						</Box>
 						<Box gridArea="main" overflow="auto">
 							<Switch>
 								<Route path="/" exact component={Home}></Route>
 								<Route
-									path="/launches/past"
+									path="/pastLaunches"
 									component={Past}
 								></Route>
 								<Route
-									path="/launches/upcoming"
+									path="/upcomingLaunches"
 									component={Upcoming}
 								></Route>
 								<Route
-									path="/my_collections"
+									path="/myCollections"
 									component={MyCollections}
 								></Route>
 							</Switch>

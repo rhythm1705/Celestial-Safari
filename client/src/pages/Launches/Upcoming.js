@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, InfiniteScroll } from "grommet";
-import Card from "../../components/Card";
+import LaunchCard from "../../components/LaunchCard";
 import Spinner from "../../components/Spinner";
 import { external as axios } from "../../utils/externalAxios";
 
@@ -21,7 +21,7 @@ function Upcoming() {
 							const upcomingLaunchesData = res.data.launches.map(
 								upcomingLaunch => {
 									return (
-										<Card
+										<LaunchCard
 											key={upcomingLaunch.id}
 											itemId={upcomingLaunch.id}
 											title={upcomingLaunch.name}
@@ -29,9 +29,7 @@ function Upcoming() {
 												upcomingLaunch.location.name
 											}
 											date={upcomingLaunch.net}
-											backgroundImg={
-												upcomingLaunch.rocket.imageURL
-											}
+											img={upcomingLaunch.rocket.imageURL}
 										/>
 									);
 								}

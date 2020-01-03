@@ -2,18 +2,16 @@ import React from "react";
 import { Box, Text, Image } from "grommet";
 
 function NewsCard(props) {
+	const date = new Date(Date.parse(props.date)).toLocaleString("en-US", {
+		timeStyle: "short",
+		dateStyle: "short"
+	});
 	return (
 		<Box
-			animation={{
-				type: "pulse",
-				delay: 0,
-				duration: 3000,
-				size: "xsmall"
-			}}
 			border="all"
-			height={{ min: "small", max: "small" }}
+			// height={{ max: "small" }}
 			fill="horizontal"
-			margin="small"
+			margin="xsmall"
 			hoverIndicator
 			round
 			onClick={() => {
@@ -22,15 +20,19 @@ function NewsCard(props) {
 			direction="row"
 			align="center"
 			justify="between"
+			pad="medium"
+			flex={false}
 		>
 			<Box direction="column" margin="xsmall">
-				<Text size="medium">{props.site}</Text>
-				<Text size="small">{props.title}</Text>
-				<Text size="small">{props.date}</Text>
+				<Text size="large">{props.site}</Text>
+				<Text size="medium" weight="bold">
+					{props.title}
+				</Text>
+				<Text size="medium">{date}</Text>
 			</Box>
 			<Box
-				height={{ max: "xsmall" }}
-				width={{ max: "xsmall" }}
+				height={{ min: "xsmall", max: "xsmall" }}
+				width={{ min: "xsmall", max: "xsmall" }}
 				margin="small"
 				round
 				overflow="hidden"

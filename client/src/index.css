@@ -1,20 +1,41 @@
 .dark-mode-toggle.react-toggle--checked .react-toggle-track {
-	background-color: black;
+	background-color: #222222;
 }
 
 .dark-mode-toggle .react-toggle-track {
-	background-color: white;
+	background-color: #11111111;
 }
 
 .dark-mode-toggle .react-toggle-thumb {
-	background-color: rgb(111, 255, 176);
+	background-color: #007575;
+	border: 1px solid none;
 }
-
+.dark-mode-toggle.react-toggle--checked .react-toggle-thumb {
+	border-color: #007575;
+}
 .dark-mode-toggle.react-toggle--checked:hover:not(.react-toggle--disabled)
 	.react-toggle-track {
-	background-color: black;
+	background-color: #222222;
 }
 
 .dark-mode-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+	background-color: #11111111;
+}
+
+.dark-mode-toggle.react-toggle--focus .react-toggle-thumb {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.burger .burger-lines,
+.burger .burger-lines:after,
+.burger .burger-lines:before {
+	background-color: #007575;
+}
+
+.FAB .burger-lines,
+.FAB .burger-lines:after,
+.FAB .burger-lines:before {
 	background-color: white;
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Text, Heading, Layer, Tab, Tabs, Image } from "grommet";
-import { FormClose } from "grommet-icons";
+import { Anchor, Box, Button, Text, Layer, Tab, Tabs, Image } from "grommet";
+import { Calendar, Location, Info, Link } from "grommet-icons";
+
+import { FormClose, Play } from "grommet-icons";
 import NewsCard from "./NewsCard";
 import { external as axios } from "../utils/externalAxios";
 
@@ -8,6 +10,9 @@ function InfoPage(props) {
 	const [itemData, setItemData] = useState([]);
 	const [about, setAbout] = useState("");
 	const [updates, setUpdates] = useState([]);
+
+	const calendarLink =
+		"https://launchlibrary.net/1.4/calendar/" + props.itemId;
 
 	useEffect(() => {
 		const fetchItem = async () => {
@@ -50,30 +55,107 @@ function InfoPage(props) {
 		<>
 			{props.showInfoPage && itemData.length !== 0 && (
 				<Layer full animation="fadeIn">
-					<Box fill pad="medium">
-						<Box>
-							<Box>
-								<Box
-									direction="row"
-									align="center"
-									justify="between"
-								>
-									<Heading level="3" margin="small">
-										{itemData[0].name}
-									</Heading>
-									<Button
-										icon={<FormClose size="medium" />}
-										onClick={() => props.viewInfoPage()}
-									/>
-								</Box>
-								<Text>{itemData[0].net}</Text>
-								<Text>{itemData[0].location.name}</Text>
+					<Box fill>
+						<Box
+							direction="row"
+							pad="medium"
+							align="center"
+							justify="between"
+							gap="small"
+							background="background-contrast"
+						>
+							<Box
+								round="full"
+								overflow="hidden"
+								width={{ min: "xsmall", max: "xsmall" }}
+								height={{ min: "xsmall", max: "xsmall" }}
+							>
+								<Image
+									src={itemData[0].rocket.imageURL}
+									fill
+									fit="cover"
+								></Image>
 							</Box>
-							<Image src="" />
+							<Box alignSelf="start" fill justify="center">
+								<Text size="large" weight="bold" color="text">
+									{itemData[0].name}
+								</Text>
+								<Anchor label={itemData[0].lsp.name} />
+							</Box>
+							<Button
+								icon={<FormClose size="medium" />}
+								onClick={() => props.viewInfoPage()}
+							/>
 						</Box>
+
 						<Box flex pad="xsmall">
 							<Tabs flex>
-								<Tab title="About">{about}</Tab>
+								<Tab title="About">
+									<Box
+										pad="medium"
+										gap="small"
+										align="start"
+										overflow="auto"
+										fill
+									>
+										<Anchor
+											color="neutral-3"
+											href={calendarLink}
+											icon={<Calendar />}
+											label={itemData[0].net}
+										/>
+										<Anchor
+											icon={<Location />}
+											label={itemData[0].location.name}
+											color="neutral-4"
+											href={
+												"https://www.google.com/maps/search/?api=1&query=" +
+												itemData[0].location.name
+											}
+										/>
+										<Button
+											label="Watch Launch"
+											icon={<Play color="red" />}
+											color="red"
+											href={itemData[0].vidURLs[0]}
+											disabled={
+												itemData[0].vidURLs.length === 0
+											}
+										/>
+										<Text>{about}</Text>
+										<Box
+											direction="row"
+											gap="small"
+											justify="evenly"
+											align="center"
+											flex={false}
+										>
+											<Button
+												label="Wikipedia"
+												icon={<Link color="grey" />}
+												color="grey"
+												href={
+													itemData[0].rocket.wikiURL
+												}
+											/>
+											{itemData[0].rocket.infoURLs.map(
+												url => {
+													return (
+														<Button
+															key={url}
+															label="More Info"
+															icon={
+																<Info color="blue" />
+															}
+															color="blue"
+															href={url}
+														/>
+													);
+												}
+											)}
+										</Box>
+									</Box>
+								</Tab>
 								<Tab title="Updates">
 									<Box
 										fill
@@ -97,15 +179,46 @@ function InfoPage(props) {
 									<Box
 										fill
 										overflow="auto"
-										pad="small"
+										pad="medium"
 										align="center"
+										gap="small"
+										flex={false}
 									>
 										{itemData[0].missions.map(mission => (
-											<Box key={mission.id}>
-												<Text>{mission.name}</Text>
+											<Box
+												align="start"
+												key={mission.id}
+												flex={false}
+											>
+												<Box
+													justify="between"
+													align="center"
+													direction="row"
+													fill="horizontal"
+												>
+													<Text weight="bold">
+														{mission.name}
+													</Text>
+													<Text
+														weight="bold"
+														color="green"
+													>
+														{mission.typeName}
+													</Text>
+												</Box>
 												<Text>
 													{mission.description}
 												</Text>
+												<Button
+													label="Wikipedia"
+													icon={<Link color="grey" />}
+													color="grey"
+													href={mission.wikiURL}
+													disabled={
+														mission.wikiURL
+															.length === 0
+													}
+												/>
 											</Box>
 										))}
 									</Box>

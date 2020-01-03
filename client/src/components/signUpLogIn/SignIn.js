@@ -17,9 +17,10 @@ function SignIn() {
 	useEffect(() => {
 		if (auth.isAuthenticated) {
 			setMsg("Log in successful");
-		} else if (error) {
-			setMsg(JSON.stringify(error.error));
+		} else if (error.error) {
+			setMsg(error.error);
 			setLoading(false);
+			setOpen(true);
 		}
 	}, [auth.isAuthenticated, error]);
 
@@ -28,7 +29,6 @@ function SignIn() {
 		event.preventDefault();
 		setLoading(true);
 		dispatch(loginUser(event.value));
-		setOpen(true);
 	};
 
 	return (
@@ -40,28 +40,23 @@ function SignIn() {
 				required
 				type="Password"
 			/>
-			<Box direction="row" justify="between" margin={{ top: "medium" }}>
-				{loading ? (
-					<Button margin="xsmall" label="Signing in.." disabled />
-				) : (
-					<Button
-						margin="xsmall"
-						type="submit"
-						label="Sign In"
-						primary
-					/>
-				)}
-				<Collapsible open={open} direction="horizontal">
-					<Box
-						background="light-2"
-						pad="small"
-						align="center"
-						justify="center"
-					>
-						<Text>{msg}</Text>
-					</Box>
-				</Collapsible>
-			</Box>
+			<Button
+				margin="xsmall"
+				type="submit"
+				label={!loading ? "Sign In" : "Signing in..."}
+				primary
+			/>
+			<Collapsible open={open} direction="horizontal">
+				<Box
+					background="background-contrast"
+					pad="small"
+					align="center"
+					justify="center"
+					margin="small"
+				>
+					<Text color="text">{msg}</Text>
+				</Box>
+			</Collapsible>
 		</Form>
 	);
 }

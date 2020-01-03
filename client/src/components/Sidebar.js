@@ -1,23 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Box,
 	Button,
 	Layer,
-	Text,
 	Heading,
 	Collapsible,
 	ResponsiveContext
 } from "grommet";
-import { Add, FormClose, Launch, Home, Organization } from "grommet-icons";
-import { Link } from "react-router-dom";
+import { Launch, Home, Bookmark } from "grommet-icons";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+function SidebarNav(props) {
+	const size = React.useContext(ResponsiveContext);
+	return (
+		<>
+			{props.visible && (
+				<Link to={props.to}>
+					<Button
+						plain
+						active={props.active}
+						onClick={() => {
+							if (size === "small") {
+								props.setSidebar();
+							}
+							props.setActive();
+						}}
+						fill
+						hoverIndicator="active"
+					>
+						<Box
+							pad={{
+								horizontal: "xsmall",
+								vertical: "xsmall"
+							}}
+							background={props.active ? "selected" : undefined}
+							direction="row"
+							align="center"
+							gap="small"
+						>
+							{props.icon}
+							<Heading
+								level="4"
+								color="text"
+								margin={{
+									vertical:
+										size !== "small" ? "small" : "medium"
+								}}
+							>
+								{props.label}
+							</Heading>
+						</Box>
+					</Button>
+				</Link>
+			)}
+		</>
+	);
+}
+
 function Sidebar(props) {
+	let location = useLocation();
+	console.log("ROUTER location", location);
+	const [active, setActive] = useState(location.pathname);
 	const auth = useSelector(state => state.auth);
 	const size = React.useContext(ResponsiveContext);
 	const SidebarComponent = size === "small" ? Layer : Collapsible;
 	const sidebarProps =
-		size === "small" ? { full: true } : { direction: "horizontal" };
+		size === "small"
+			? { full: "vertical", position: "left", responsive: false }
+			: { direction: "horizontal" };
+	const sidebarNavData = [
+		{ to: "/", icon: <Home />, label: "Home", visible: true },
+		{
+			to: "/pastLaunches",
+			icon: <Launch />,
+			label: "Past Launches",
+			visible: true
+		},
+		{
+			to: "/upcomingLaunches",
+			icon: <Launch />,
+			label: "Upcoming Launches",
+			visible: true
+		},
+		{
+			to: "/myCollections",
+			icon: <Bookmark />,
+			label: "My Collections",
+			visible: auth.isAuthenticated
+		}
+	];
 	return (
 		<SidebarComponent {...sidebarProps} open={props.open}>
 			<Box
@@ -36,66 +108,24 @@ function Sidebar(props) {
 						? "Hi" + auth.user.name + "!"
 						: "Not logged in."}
 				</Heading>
-				{size === "small" && (
-					<Box align="end">
-						<Button
-							icon={<FormClose />}
-							onClick={() => props.setSidebar()}
-						/>
-					</Box>
-				)}
 			</Box>
-			<Box gap="medium">
-				<Link to="/">
-					<Button
-						as="button"
-						plain
-						hoverIndicator
-						icon={<Home />}
-						label="Home"
-						onClick={() => size === "small" && props.setSidebar()}
-					/>
-				</Link>
-				<Link to="/launches/past">
-					<Button
-						plain
-						hoverIndicator
-						icon={<Launch />}
-						label="Past Launches"
-						onClick={() => size === "small" && props.setSidebar()}
-					/>
-				</Link>
-				<Link to="/launches/upcoming">
-					<Button
-						plain
-						hoverIndicator
-						icon={<Launch />}
-						label="Upcoming Launches"
-						onClick={() => size === "small" && props.setSidebar()}
-					/>
-				</Link>
-				{/* <Link to="/agencies">
-					<Button
-						plain
-						hoverIndicator
-						icon={<Organization />}
-						label="Agencies"
-						onClick={() => size === "small" && props.setSidebar()}
-					/>
-				</Link> */}
-				{auth.isAuthenticated && (
-					<Link to="/my_collections">
-						<Button
-							plain
-							hoverIndicator
-							icon={<Add />}
-							label="My Collections"
-							onClick={() =>
-								size === "small" && props.setSidebar()
-							}
+			<Box fill>
+				{sidebarNavData.map(nav => {
+					return (
+						<SidebarNav
+							key={nav.label}
+							to={nav.to}
+							icon={nav.icon}
+							label={nav.label}
+							visible={nav.visible}
+							setSidebar={props.setSidebar}
+							setActive={() => {
+								setActive(nav.to);
+							}}
+							active={nav.to === active}
 						/>
-					</Link>
-				)}
+					);
+				})}
 			</Box>
 		</SidebarComponent>
 	);

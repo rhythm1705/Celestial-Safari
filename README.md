@@ -12,7 +12,7 @@ npm run dev
 This runs the front-end (localhost:3000) and back-end (localhost:5000) simultaneously using concurrently.
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Read [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) to get started.
 
 ## Learn more
 

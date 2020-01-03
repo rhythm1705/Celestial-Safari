@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, DropButton, Text, Image } from "grommet";
-import { Calendar, Location } from "grommet-icons";
+import { Calendar, Location, Edit, Info } from "grommet-icons";
 import InfoPage from "./InfoPage";
 import AddToCollection from "./AddToCollection";
 import NewCollection from "./NewCollection";
@@ -38,7 +38,9 @@ function LaunchCard(props) {
 			round
 			pad="small"
 		>
-			<Text size="xlarge">{props.title}</Text>
+			<Text size="xlarge" pad="small">
+				{props.title}
+			</Text>
 			<Box gap="small" justify="between" direction="row" align="center">
 				<Box
 					round="full"
@@ -48,7 +50,7 @@ function LaunchCard(props) {
 				>
 					<Image src={props.img} fill fit="cover"></Image>
 				</Box>
-				<Box alignSelf="start" fill justify="between">
+				<Box alignSelf="start" fill justify="between" align="start">
 					{props.location !== "" && (
 						<Box
 							pad={{
@@ -84,7 +86,8 @@ function LaunchCard(props) {
 					<>
 						<DropButton
 							alignSelf="stretch"
-							label="Add"
+							label="Edit"
+							icon={<Edit size="small" />}
 							fill="horizontal"
 							dropAlign={{
 								top: "bottom",
@@ -117,6 +120,7 @@ function LaunchCard(props) {
 				<Button
 					alignSelf="stretch"
 					label="Info"
+					icon={<Info size="small" />}
 					fill="horizontal"
 					onClick={() => {
 						// alert("info");

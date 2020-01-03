@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Anchor, Box, Button, Text, Layer, Tab, Tabs, Image } from "grommet";
 import { Calendar, Location, Info, Link } from "grommet-icons";
+import PageNotFound from "../assets/PageNotFound.svg";
+import FatalError from "../assets/FatalError.svg";
 
 import { FormClose, Play } from "grommet-icons";
 import NewsCard from "./NewsCard";
@@ -88,7 +90,7 @@ function InfoPage(props) {
 							/>
 						</Box>
 
-						<Box flex pad="xsmall">
+						<Box flex pad="xsmall" align="stretch">
 							<Tabs flex>
 								<Tab title="About">
 									<Box
@@ -157,6 +159,28 @@ function InfoPage(props) {
 									</Box>
 								</Tab>
 								<Tab title="Updates">
+									{updates.length === 0 && (
+										<Box
+											fill
+											justify="center"
+											align="center"
+										>
+											<Box width="medium" height="medium">
+												<Image
+													src={PageNotFound}
+													fit="contain"
+													fill
+												></Image>
+											</Box>
+											<Text
+												size="large"
+												weight="bold"
+												color="control"
+											>
+												No updates found.
+											</Text>
+										</Box>
+									)}
 									<Box
 										fill
 										overflow="auto"
@@ -176,12 +200,33 @@ function InfoPage(props) {
 									</Box>
 								</Tab>
 								<Tab title="Missions">
+									{itemData[0].missions.length === 0 && (
+										<Box
+											fill
+											justify="center"
+											align="center"
+										>
+											<Box width="medium" height="medium">
+												<Image
+													src={FatalError}
+													fit="contain"
+													fill
+												></Image>
+											</Box>
+											<Text
+												size="large"
+												weight="bold"
+												color="control"
+											>
+												No missions found.
+											</Text>
+										</Box>
+									)}
 									<Box
-										fill
+										fill="horizontal"
 										overflow="auto"
 										pad="medium"
 										gap="small"
-										flex={false}
 									>
 										{itemData[0].missions.map(mission => (
 											<Box

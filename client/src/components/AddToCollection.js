@@ -39,7 +39,7 @@ function Collection(props) {
 	};
 	return (
 		<Button
-			hoverIndicator
+			hoverIndicator={{ color: "rgba(0, 0, 0, 0.3)" }}
 			onClick={() => {
 				props.type === "launch" &&
 					addLaunchToCollection([props.id, props.itemId]);
@@ -49,8 +49,12 @@ function Collection(props) {
 			}}
 		>
 			<Box pad="small" direction="row" align="center" gap="small">
-				{inCollection ? <Checkmark /> : <Add />}
-				<Text>{props.name}</Text>
+				{inCollection ? (
+					<Checkmark color="status-ok" />
+				) : (
+					<Add color="control" />
+				)}
+				<Text color="control">{props.name}</Text>
 			</Box>
 		</Button>
 	);
@@ -77,7 +81,7 @@ function AddToCollection(props) {
 	}, [auth.isAuthenticated, userCollections, auth.user.id]);
 
 	return (
-		<Box pad="small" gap="small" background="background-contrast" round>
+		<Box pad="small" gap="small" round>
 			<Button
 				alignSelf="stretch"
 				label="New Collection"

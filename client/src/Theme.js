@@ -6,6 +6,13 @@ const theme = {
 	spacing: 20,
 	defaultMode: "light",
 	global: {
+		drop: {
+			background: "background-front",
+			"active-background": "blue",
+			border: {
+				radius: "16px"
+			}
+		},
 		colors: {
 			brand: {
 				dark: "#007575",
@@ -51,7 +58,7 @@ const theme = {
 				light: "#6807f9",
 				dark: "#5205C5"
 			},
-			focus: "none",
+			focus: "control",
 			"active-background": "background-contrast",
 			"active-text": "text-strong",
 			"selected-background": {
@@ -492,54 +499,24 @@ const theme = {
 	tabs: {
 		panel: {
 			extend: () => css``
-		},
-		header: {
-			extend: () => css`
-				margin: 10px;
-				padding: none;
-				background: none;
-			`
 		}
 	},
 	tab: {
 		color: "text",
 		active: {
-			background: "brand",
-			color: "text-strong"
+			color: "brand"
 		},
-		border: undefined,
-		margin: undefined,
-		extend: () => css`
-			border-radius: 16px;
-			padding: 0 14px;
-			text-align: center;
-			line-height: 40px;
-			position: relative;
-			transition: 0.2s ease-in-out;
-			overflow: hidden;
-
-			&::after {
-				content: "";
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				transform: translateY(-100%);
-				background-color: #007575;
-				transition: transform 0.2s ease-out;
-				z-index: -1;
+		border: {
+			side: "bottom",
+			size: "small",
+			color: "text",
+			active: {
+				color: "brand"
+			},
+			hover: {
+				color: "text-strong"
 			}
-
-			&:hover {
-				transition: 0.2s ease-out;
-			}
-
-			&:hover::after {
-				transform: translateY(0);
-				transition: transform 0.2s ease-in;
-			}
-		`
+		}
 	}
 };
 

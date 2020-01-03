@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, InfiniteScroll, Grid, Select, Tabs, Tab } from "grommet";
+import {
+	Box,
+	Button,
+	InfiniteScroll,
+	Grid,
+	Select,
+	Tabs,
+	Tab,
+	Header,
+	Image,
+	Text
+} from "grommet";
+import ListEmpty from "../../assets/ListEmpty.svg";
+import SelectImage from "../../assets/Select.svg";
 import LaunchCard from "../../components/LaunchCard";
 import NewCollection from "../../components/NewCollection";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { external as externalAxios } from "../../utils/externalAxios";
+import { AddCircle, Trash } from "grommet-icons";
 
 function MyCollections() {
 	const [selectedCollection, setSelectedCollection] = useState({
@@ -104,12 +118,16 @@ function MyCollections() {
 
 	console.log("launches", launches);
 	return (
-		<>
-			<Box direction="row" pad="small" gap="medium">
+		<Box flex>
+			<Box direction="row" pad="small" gap="medium" flex={false}>
 				{collections && (
 					<Select
 						children={option => {
-							return option.name;
+							return (
+								<Header pad="small">
+									<Text size="medium">{option.name}</Text>
+								</Header>
+							);
 						}}
 						placeholder="Select"
 						options={collections}
@@ -119,14 +137,16 @@ function MyCollections() {
 					/>
 				)}
 				<Button
-					alignSelf="stretch"
+					// alignSelf="stretch"
 					label="New"
+					icon={<AddCircle />}
 					onClick={toggleNewCollection()}
 					primary
 				/>
 				<Button
-					alignSelf="stretch"
+					// alignSelf="stretch"
 					label="Delete"
+					icon={<Trash />}
 					disabled={selectedCollection.name === "Select a Collection"}
 					onClick={() => deleteCollection()}
 					color="status-critical"
@@ -138,8 +158,22 @@ function MyCollections() {
 				invisible={toggleNewCollection()}
 				open={newCollection}
 			></NewCollection>
-			{selectedCollection.name !== "Select a Collection" && (
-				<Box flex>
+			{selectedCollection.name !== "Select a Collection" ? (
+				<Box flex fill>
+					{launches.length === 0 && (
+						<Box fill justify="center" align="center">
+							<Box width="medium" height="medium">
+								<Image
+									src={ListEmpty}
+									fit="contain"
+									fill
+								></Image>
+							</Box>
+							<Text size="large" weight="bold" color="control">
+								Add some items to this collection.
+							</Text>
+						</Box>
+					)}
 					<Tabs>
 						{selectedCollection.launches.length > 0 &&
 							launches.length !== 0 && (
@@ -166,8 +200,17 @@ function MyCollections() {
 							)}
 					</Tabs>
 				</Box>
+			) : (
+				<Box fill justify="center" align="center">
+					<Box width="medium" height="medium">
+						<Image src={SelectImage} fit="contain" fill></Image>
+					</Box>
+					<Text size="large" weight="bold" color="control">
+						Choose a collection to view.
+					</Text>
+				</Box>
 			)}
-		</>
+		</Box>
 	);
 }
 

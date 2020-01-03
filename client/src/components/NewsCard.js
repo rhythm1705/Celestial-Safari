@@ -9,7 +9,7 @@ function NewsCard(props) {
 	return (
 		<Box
 			border="all"
-			height={{ max: "small" }}
+			// height={{ max: "small" }}
 			fill="horizontal"
 			margin="xsmall"
 			hoverIndicator
@@ -21,6 +21,7 @@ function NewsCard(props) {
 			align="center"
 			justify="between"
 			pad="medium"
+			flex={false}
 		>
 			<Box direction="column" margin="xsmall">
 				<Text size="large">{props.site}</Text>

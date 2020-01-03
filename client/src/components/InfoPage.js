@@ -88,131 +88,143 @@ function InfoPage(props) {
 							/>
 						</Box>
 
-						{/* <Box flex pad="xsmall"> */}
-						<Tabs flex>
-							<Tab title="About">
-								<Box
-									pad="medium"
-									gap="small"
-									align="start"
-									overflow="auto"
-									fill
-								>
-									<Anchor
-										color="neutral-3"
-										href={calendarLink}
-										icon={<Calendar />}
-										label={itemData[0].net}
-									/>
-									<Anchor
-										icon={<Location />}
-										label={itemData[0].location.name}
-										color="neutral-4"
-										href={
-											"https://www.google.com/maps/search/?api=1&query=" +
-											itemData[0].location.name
-										}
-									/>
-									<Button
-										label="Watch Launch"
-										icon={<Play color="red" />}
-										color="red"
-										href={itemData[0].vidURLs[0]}
-										disabled={
-											itemData[0].vidURLs.length === 0
-										}
-									/>
-									<Text>{about}</Text>
+						<Box flex pad="xsmall">
+							<Tabs flex>
+								<Tab title="About">
 									<Box
-										direction="row"
+										pad="medium"
 										gap="small"
-										justify="evenly"
-										align="center"
+										align="start"
+										overflow="auto"
+										fill
 									>
-										<Button
-											label="Wikipedia"
-											icon={<Link color="grey" />}
-											color="grey"
-											href={itemData[0].rocket.wikiURL}
+										<Anchor
+											color="neutral-3"
+											href={calendarLink}
+											icon={<Calendar />}
+											label={itemData[0].net}
 										/>
-										{itemData[0].rocket.infoURLs.map(
-											url => {
-												return (
-													<Button
-														key={url}
-														label="More Info"
-														icon={
-															<Info color="blue" />
-														}
-														color="blue"
-														href={url}
-													/>
-												);
+										<Anchor
+											icon={<Location />}
+											label={itemData[0].location.name}
+											color="neutral-4"
+											href={
+												"https://www.google.com/maps/search/?api=1&query=" +
+												itemData[0].location.name
 											}
-										)}
-									</Box>
-								</Box>
-							</Tab>
-							<Tab title="Updates">
-								<Box
-									fill
-									overflow="auto"
-									pad="small"
-									align="center"
-								>
-									{updates.map(update => (
-										<NewsCard
-											title={update.title}
-											image={update.featured_image}
-											site={update.news_site_long}
-											date={update.published_date}
-											url={update.url}
-											key={update._id}
-										></NewsCard>
-									))}
-								</Box>
-							</Tab>
-							<Tab title="Missions">
-								<Box
-									fill
-									overflow="auto"
-									pad="medium"
-									align="center"
-									gap="small"
-								>
-									{itemData[0].missions.map(mission => (
-										<Box align="start" key={mission.id}>
-											<Box
-												justify="between"
-												align="center"
-												direction="row"
-												fill="horizontal"
-											>
-												<Text weight="bold">
-													{mission.name}
-												</Text>
-												<Text
-													weight="bold"
-													color="green"
-												>
-													{mission.typeName}
-												</Text>
-											</Box>
-											<Text>{mission.description}</Text>
+										/>
+										<Button
+											label="Watch Launch"
+											icon={<Play color="red" />}
+											color="red"
+											href={itemData[0].vidURLs[0]}
+											disabled={
+												itemData[0].vidURLs.length === 0
+											}
+										/>
+										<Text>{about}</Text>
+										<Box
+											direction="row"
+											gap="small"
+											justify="evenly"
+											align="center"
+											flex={false}
+										>
 											<Button
 												label="Wikipedia"
 												icon={<Link color="grey" />}
 												color="grey"
-												href={mission.wikiURL}
-												disabled={
-													mission.wikiURL.length === 0
+												href={
+													itemData[0].rocket.wikiURL
 												}
 											/>
+											{itemData[0].rocket.infoURLs.map(
+												url => {
+													return (
+														<Button
+															key={url}
+															label="More Info"
+															icon={
+																<Info color="blue" />
+															}
+															color="blue"
+															href={url}
+														/>
+													);
+												}
+											)}
 										</Box>
-									))}
-								</Box>
-							</Tab>
-						</Tabs>
+									</Box>
+								</Tab>
+								<Tab title="Updates">
+									<Box
+										fill
+										overflow="auto"
+										pad="small"
+										align="center"
+									>
+										{updates.map(update => (
+											<NewsCard
+												title={update.title}
+												image={update.featured_image}
+												site={update.news_site_long}
+												date={update.published_date}
+												url={update.url}
+												key={update._id}
+											></NewsCard>
+										))}
+									</Box>
+								</Tab>
+								<Tab title="Missions">
+									<Box
+										fill
+										overflow="auto"
+										pad="medium"
+										align="center"
+										gap="small"
+										flex={false}
+									>
+										{itemData[0].missions.map(mission => (
+											<Box
+												align="start"
+												key={mission.id}
+												flex={false}
+											>
+												<Box
+													justify="between"
+													align="center"
+													direction="row"
+													fill="horizontal"
+												>
+													<Text weight="bold">
+														{mission.name}
+													</Text>
+													<Text
+														weight="bold"
+														color="green"
+													>
+														{mission.typeName}
+													</Text>
+												</Box>
+												<Text>
+													{mission.description}
+												</Text>
+												<Button
+													label="Wikipedia"
+													icon={<Link color="grey" />}
+													color="grey"
+													href={mission.wikiURL}
+													disabled={
+														mission.wikiURL
+															.length === 0
+													}
+												/>
+											</Box>
+										))}
+									</Box>
+								</Tab>
+							</Tabs>
+						</Box>
 					</Box>
 				</Layer>
 			)}

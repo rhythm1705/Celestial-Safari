@@ -33,24 +33,37 @@ function LaunchCard(props) {
 			border
 			animation="slideUp"
 			margin="small"
-			align="center"
-			round
-			gap="small"
 			justify="between"
+			alignContent="center"
+			round
 			pad="small"
-			direction="row"
 		>
-			<Box
-				round="full"
-				overflow="hidden"
-				width={{ min: "xsmall", max: "xsmall" }}
-				height={{ min: "xsmall", max: "xsmall" }}
-			>
-				<Image src={props.img} fill fit="cover"></Image>
-			</Box>
-			<Box alignSelf="start" fill justify="between">
-				<Text size="xlarge">{props.title}</Text>
-				{props.location !== "" && (
+			<Text size="xlarge">{props.title}</Text>
+			<Box gap="small" justify="between" direction="row" align="center">
+				<Box
+					round="full"
+					overflow="hidden"
+					width={{ min: "xsmall", max: "xsmall" }}
+					height={{ min: "xsmall", max: "xsmall" }}
+				>
+					<Image src={props.img} fill fit="cover"></Image>
+				</Box>
+				<Box alignSelf="start" fill justify="between">
+					{props.location !== "" && (
+						<Box
+							pad={{
+								horizontal: "xsmall",
+								vertical: "xsmall"
+							}}
+							background={props.active ? "selected" : undefined}
+							direction="row"
+							align="center"
+							gap="small"
+						>
+							<Location size="medium" color="control" />
+							<Text size="medium">{props.location}</Text>
+						</Box>
+					)}
 					<Box
 						pad={{
 							horizontal: "xsmall",
@@ -61,26 +74,14 @@ function LaunchCard(props) {
 						align="center"
 						gap="small"
 					>
-						<Location size="medium" color="control" />
-						<Text size="medium">{props.location}</Text>
+						<Calendar size="medium" color="control" />
+						<Text size="medium">{props.date}</Text>
 					</Box>
-				)}
-				<Box
-					pad={{
-						horizontal: "xsmall",
-						vertical: "xsmall"
-					}}
-					background={props.active ? "selected" : undefined}
-					direction="row"
-					align="center"
-					gap="small"
-				>
-					<Calendar size="medium" color="control" />
-					<Text size="medium">{props.date}</Text>
 				</Box>
-
-				<Box direction="row" gap="medium">
-					{auth.isAuthenticated && (
+			</Box>
+			<Box direction="row" gap="medium">
+				{auth.isAuthenticated && (
+					<>
 						<DropButton
 							alignSelf="stretch"
 							label="Add"
@@ -104,32 +105,33 @@ function LaunchCard(props) {
 							open={showDropdown}
 							primary
 						/>
-					)}
-					<NewCollection
-						invisible={toggleNewCollection()}
-						open={newCollection}
-						type="launch"
-						itemId={props.itemId}
-					></NewCollection>
-					<Button
-						alignSelf="stretch"
-						label="Info"
-						fill="horizontal"
-						onClick={() => {
-							// alert("info");
-							setInfoPage(true);
-						}}
-						primary
-					/>
-				</Box>
-				{infoPage && (
-					<InfoPage
-						itemId={props.itemId}
-						showInfoPage={infoPage}
-						viewInfoPage={viewInfoPage()}
-					></InfoPage>
+						<NewCollection
+							invisible={toggleNewCollection()}
+							open={newCollection}
+							type="launch"
+							itemId={props.itemId}
+						></NewCollection>
+					</>
 				)}
+
+				<Button
+					alignSelf="stretch"
+					label="Info"
+					fill="horizontal"
+					onClick={() => {
+						// alert("info");
+						setInfoPage(true);
+					}}
+					primary
+				/>
 			</Box>
+			{infoPage && (
+				<InfoPage
+					itemId={props.itemId}
+					showInfoPage={infoPage}
+					viewInfoPage={viewInfoPage()}
+				></InfoPage>
+			)}
 		</Box>
 	);
 }

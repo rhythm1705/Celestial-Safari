@@ -180,7 +180,6 @@ function InfoPage(props) {
 										fill
 										overflow="auto"
 										pad="medium"
-										align="center"
 										gap="small"
 										flex={false}
 									>

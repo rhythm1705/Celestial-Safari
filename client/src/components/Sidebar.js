@@ -7,7 +7,7 @@ import {
 	Collapsible,
 	ResponsiveContext
 } from "grommet";
-import { Launch, Home, Bookmark } from "grommet-icons";
+import { Launch, Home, Bookmark, StatusInfo } from "grommet-icons";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -88,6 +88,12 @@ function Sidebar(props) {
 			icon: <Bookmark />,
 			label: "My Collections",
 			visible: auth.isAuthenticated
+		},
+		{
+			to: "/about",
+			icon: <StatusInfo />,
+			label: "About",
+			visible: true
 		}
 	];
 	return (

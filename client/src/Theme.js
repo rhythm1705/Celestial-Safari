@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { SubtractCircle, AddCircle } from "grommet-icons";
 
 const theme = {
 	name: "Celestial",
@@ -517,6 +518,14 @@ const theme = {
 				color: "text-strong"
 			}
 		}
+	},
+	accordion: {
+		heading: { level: "2" },
+		icons: {
+			collapse: SubtractCircle,
+			expand: AddCircle
+		},
+		border: undefined
 	}
 };
 

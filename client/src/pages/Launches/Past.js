@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Grid, InfiniteScroll, ResponsiveContext } from "grommet";
+import { Grid, InfiniteScroll, ResponsiveContext, Box } from "grommet";
 import LaunchCard from "../../components/LaunchCard";
-import Spinner from "../../components/Spinner";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { external as axios } from "../../utils/externalAxios";
 
 function Past() {
@@ -56,7 +56,9 @@ function Past() {
 	return (
 		<>
 			{pastLaunches.length === 0 ? (
-				<Spinner></Spinner>
+				<Box align="center" justify="center" fill>
+					<ClimbingBoxLoader color="#007575" />
+				</Box>
 			) : (
 				<Grid columns="medium" gap="small">
 					<InfiniteScroll

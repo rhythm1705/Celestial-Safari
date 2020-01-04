@@ -15,6 +15,7 @@ import ListEmpty from "../../assets/ListEmpty.svg";
 import SelectImage from "../../assets/Select.svg";
 import LaunchCard from "../../components/LaunchCard";
 import NewCollection from "../../components/NewCollection";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { external as externalAxios } from "../../utils/externalAxios";
@@ -26,7 +27,7 @@ function MyCollections() {
 	});
 	const [collections, setCollections] = useState();
 	const [newCollection, setNewCollection] = useState(false);
-	const [launches, setLaunches] = useState([]);
+	const [launches, setLaunches] = useState(null);
 	const auth = useSelector(state => state.auth);
 
 	useEffect(() => {
@@ -119,12 +120,17 @@ function MyCollections() {
 	console.log("launches", launches);
 	return (
 		<Box flex>
-			<Box direction="row" pad="small" gap="medium" flex={false}>
-				{collections && (
+			{collections && (
+				<Box
+					direction="row-responsive"
+					pad="small"
+					gap="medium"
+					flex={false}
+				>
 					<Select
 						children={option => {
 							return (
-								<Header pad="small">
+								<Header pad="medium">
 									<Text size="medium">{option.name}</Text>
 								</Header>
 							);
@@ -135,24 +141,32 @@ function MyCollections() {
 						valueKey="name"
 						onChange={({ option }) => setSelectedCollection(option)}
 					/>
-				)}
-				<Button
-					// alignSelf="stretch"
-					label="New"
-					icon={<AddCircle />}
-					onClick={toggleNewCollection()}
-					primary
-				/>
-				<Button
-					// alignSelf="stretch"
-					label="Delete"
-					icon={<Trash />}
-					disabled={selectedCollection.name === "Select a Collection"}
-					onClick={() => deleteCollection()}
-					color="status-critical"
-					primary
-				/>
-			</Box>
+					<Box
+						direction="row"
+						gap="small"
+						justify="center"
+						flex={false}
+					>
+						<Button
+							label="New"
+							icon={<AddCircle />}
+							onClick={toggleNewCollection()}
+							primary
+						/>
+						<Button
+							label="Delete"
+							icon={<Trash />}
+							disabled={
+								selectedCollection.name ===
+								"Select a Collection"
+							}
+							onClick={() => deleteCollection()}
+							color="status-critical"
+							primary
+						/>
+					</Box>
+				</Box>
+			)}
 
 			<NewCollection
 				invisible={toggleNewCollection()}
@@ -160,7 +174,7 @@ function MyCollections() {
 			></NewCollection>
 			{selectedCollection.name !== "Select a Collection" ? (
 				<Box flex fill>
-					{launches.length === 0 && (
+					{selectedCollection.launches.length === 0 && (
 						<Box fill justify="center" align="center">
 							<Box width="medium" height="medium">
 								<Image
@@ -174,30 +188,32 @@ function MyCollections() {
 							</Text>
 						</Box>
 					)}
+					{!launches && (
+						<Box align="center" justify="center" fill>
+							<ClimbingBoxLoader color="#007575" />
+						</Box>
+					)}
 					<Tabs>
-						{selectedCollection.launches.length > 0 &&
-							launches.length !== 0 && (
-								<Tab title="Launches">
-									<Box fill overflow="auto" pad="small">
-										<Grid columns="medium" gap="small">
-											<InfiniteScroll
-												items={launches}
-												step={20}
-											>
-												{launch => (
-													<React.Fragment
-														key={
-															launch.props.itemId
-														}
-													>
-														{launch}
-													</React.Fragment>
-												)}
-											</InfiniteScroll>
-										</Grid>
-									</Box>
-								</Tab>
-							)}
+						{selectedCollection.launches.length > 0 && launches && (
+							<Tab title="Launches">
+								<Box fill overflow="auto" pad="small">
+									<Grid columns="medium" gap="small">
+										<InfiniteScroll
+											items={launches}
+											step={20}
+										>
+											{launch => (
+												<React.Fragment
+													key={launch.props.itemId}
+												>
+													{launch}
+												</React.Fragment>
+											)}
+										</InfiniteScroll>
+									</Grid>
+								</Box>
+							</Tab>
+						)}
 					</Tabs>
 				</Box>
 			) : (

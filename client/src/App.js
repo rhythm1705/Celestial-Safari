@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import Upcoming from "./pages/Launches/Upcoming";
 import Past from "./pages/Launches/Past";
 import MyCollections from "./pages/MyCollections/MyCollections";
+import About from "./pages/About/About";
 import Theme from "./Theme";
 import "./index.css";
 import jwt_decode from "jwt-decode";
@@ -123,6 +124,7 @@ function App() {
 									path="/myCollections"
 									component={MyCollections}
 								></Route>
+								<Route path="/about" component={About}></Route>
 							</Switch>
 						</Box>
 					</Grid>

@@ -97,6 +97,16 @@ function AppBar(props) {
 								<Button
 									label="Sign out"
 									onClick={() => {
+										console.log(
+											"window.location.href",
+											window.location.pathname
+										);
+										if (
+											window.location.pathname ===
+											"/myCollections"
+										) {
+											window.location.href = "../";
+										}
 										dispatch(logoutUser());
 									}}
 									primary

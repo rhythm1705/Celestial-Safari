@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "grommet";
 import { external as axios } from "../../utils/externalAxios";
-import Spinner from "../../components/Spinner";
 import NewsCard from "../../components/NewsCard";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 function News() {
 	const [NewsList, setNewsList] = useState([]);
@@ -23,22 +23,24 @@ function News() {
 	};
 	return (
 		<>
-			{NewsList.length === 0 ? (
-				<Spinner></Spinner>
-			) : (
-				<Box gap="small" margin="small" align="center">
-					{NewsList.map(news => (
-						<NewsCard
-							title={news.title}
-							image={news.featured_image}
-							site={news.news_site_long}
-							date={news.published_date}
-							url={news.url}
-							key={news._id}
-						></NewsCard>
-					))}
-				</Box>
-			)}
+			<Box gap="small" margin="small" align="center">
+				{NewsList.length === 0 ? (
+					<ClimbingBoxLoader color="#007575" />
+				) : (
+					<>
+						{NewsList.map(news => (
+							<NewsCard
+								title={news.title}
+								image={news.featured_image}
+								site={news.news_site_long}
+								date={news.published_date}
+								url={news.url}
+								key={news._id}
+							></NewsCard>
+						))}
+					</>
+				)}
+			</Box>
 		</>
 	);
 }

@@ -41,7 +41,13 @@ function LaunchCard(props) {
 			<Text size="xlarge" pad="small">
 				{props.title}
 			</Text>
-			<Box gap="small" justify="between" direction="row" align="center">
+			<Box
+				gap="small"
+				justify="between"
+				direction="row"
+				align="center"
+				pad="xsmall"
+			>
 				<Box
 					round="full"
 					overflow="hidden"
@@ -50,7 +56,7 @@ function LaunchCard(props) {
 				>
 					<Image src={props.img} fill fit="cover"></Image>
 				</Box>
-				<Box alignSelf="start" fill justify="between" align="start">
+				<Box fill justify="center">
 					{props.location !== "" && (
 						<Box
 							pad={{

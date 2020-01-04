@@ -44,8 +44,13 @@ function NewCollection(props) {
 					onClickOutside={() => props.invisible()}
 					onEsc={() => props.invisible()}
 				>
-					<Box pad="medium" gap="small" width="medium">
-						<Box direction="row" align="center" justify="between">
+					<Box pad="medium" gap="small" width={{min: "medium"}}>
+						<Box
+							direction="row"
+							align="center"
+							justify="between"
+							fill="horizontal"
+						>
 							<Heading level="3" margin="small">
 								Create new collection
 							</Heading>

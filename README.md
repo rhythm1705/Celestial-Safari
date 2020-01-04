@@ -1,4 +1,5 @@
-# Celestial Safari
+
+# [Celestial Safari](https://celestial-safari.herokuapp.com) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rhythm1705/celestial-safari/blob/master/LICENSE) 
 
 Celestial Safari is a web application written in React to keep updated about latest space news and launches.
 

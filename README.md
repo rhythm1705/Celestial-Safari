@@ -3,6 +3,11 @@
 
 Celestial Safari is a web application written in React to keep updated about latest space news and launches.
 
+![Dark](Screenshots/Dark.jpg?raw=true "Dark mode") 
+
+![Light](Screenshots/Light.jpg?raw=true "Light mode")
+
+
 ## Running the app locally
 
 In the project directory, you can run:

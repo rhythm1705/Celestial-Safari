@@ -2,7 +2,7 @@
 	"name": "celestial-safari",
 	"version": "1.0.0",
 	"engines": {
-		"node": "10.16.3"
+		"node": "13.9.0"
 	},
 	"description": "",
 	"main": "backend/server.js",

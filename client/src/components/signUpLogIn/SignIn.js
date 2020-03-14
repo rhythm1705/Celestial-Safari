@@ -11,8 +11,6 @@ function SignIn() {
 	const dispatch = useDispatch();
 	const error = useSelector(state => state.errors);
 	const auth = useSelector(state => state.auth);
-	console.log("Error", error);
-	console.log("Auth", auth.isAuthenticated, auth.user);
 
 	useEffect(() => {
 		if (auth.isAuthenticated) {
@@ -25,14 +23,13 @@ function SignIn() {
 	}, [auth.isAuthenticated, error]);
 
 	const handleSubmit = event => {
-		console.log("VALUE", event.value);
 		event.preventDefault();
 		setLoading(true);
 		dispatch(loginUser(event.value));
 	};
 
 	return (
-		<Form onReset={event => console.log(event)} onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit}>
 			<FormField label="Email" name="email" type="email" required />
 			<FormField
 				label="Password"

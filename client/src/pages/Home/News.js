@@ -9,14 +9,12 @@ function News() {
 
 	useEffect(() => {
 		fetchNewsList();
-		console.log("NEWS!!!");
 	}, []);
 
 	const fetchNewsList = async () => {
 		await axios
 			.get("https://spaceflightnewsapi.net/api/v1/articles")
 			.then(res => {
-				console.log("News", res.data);
 				const News = res.data.docs;
 				setNewsList(News);
 			});

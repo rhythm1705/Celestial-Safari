@@ -12,7 +12,6 @@ function SignUp() {
 	const dispatch = useDispatch();
 
 	const error = useSelector(state => state.errors);
-	console.log("sign up error", error);
 	useEffect(() => {
 		if (JSON.stringify(error) !== "{}") {
 			setMsg(error);
@@ -20,7 +19,6 @@ function SignUp() {
 	}, [error]);
 
 	const handleSubmit = event => {
-		console.log("VALUE", event.value);
 		event.preventDefault();
 		setLoading(true);
 		dispatch(registerUser(event.value));
@@ -28,7 +26,7 @@ function SignUp() {
 		setOpen(true);
 	};
 	return (
-		<Form onReset={event => console.log(event)} onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit}>
 			<FormField label="Name" name="name" required />
 			<FormField label="Email" name="email" type="email" required />
 			<FormField

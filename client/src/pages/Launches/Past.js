@@ -44,7 +44,6 @@ function Past() {
 							);
 						})
 						.reverse();
-					console.log("Past", res);
 					setPastLaunches(pastLaunchesData);
 				});
 		};

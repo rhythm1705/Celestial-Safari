@@ -60,7 +60,6 @@ function SidebarNav(props) {
 
 function Sidebar(props) {
 	let location = useLocation();
-	console.log("ROUTER location", location);
 	const [active, setActive] = useState(location.pathname);
 	const auth = useSelector(state => state.auth);
 	const size = React.useContext(ResponsiveContext);

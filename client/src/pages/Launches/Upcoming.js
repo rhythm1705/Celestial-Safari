@@ -34,7 +34,6 @@ function Upcoming() {
 									);
 								}
 							);
-							console.log("Upcoming", res);
 							setUpcomingLaunches(upcomingLaunchesData);
 						});
 				});

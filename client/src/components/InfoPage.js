@@ -21,7 +21,6 @@ function InfoPage(props) {
 			await axios
 				.get("https://launchlibrary.net/1.4/launch/" + props.itemId)
 				.then(res => {
-					console.log("infopage res", res);
 					setItemData(res.data.launches);
 				});
 		};
@@ -35,7 +34,6 @@ function InfoPage(props) {
 						itemData[0].rocket.wikiURL.split("/").pop()
 				)
 				.then(res => {
-					console.log("wikipedia summary res", res);
 					setAbout(res.data.extract);
 				});
 
@@ -45,13 +43,10 @@ function InfoPage(props) {
 						props.itemId
 				)
 				.then(res => {
-					console.log("updates res", res);
 					setUpdates(res.data.docs);
 				});
 		}
 	}, [itemData, props.itemId]);
-	console.log("itemId", props.itemId);
-	console.log("itemData", itemData);
 
 	return (
 		<>

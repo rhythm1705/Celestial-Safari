@@ -50,29 +50,21 @@ function MyCollections() {
 				)[0]
 			);
 		}
-
-		console.log("Running collections useeffect");
 	}, [collections, auth.user.id, selectedCollection]);
 
 	useEffect(() => {
 		const onChange = () => {
 			return () => {
-				console.log("onChange");
 				setCollections(undefined);
-				// console.log("collections here", collections);
 			};
 		};
 		const getLaunches = async () => {
-			console.log("Running getLaunches");
-			console.log("selectedCollection", selectedCollection);
-
 			const launchesData = selectedCollection.launches.map(
 				async launch => {
 					const response = await externalAxios.get(
 						"https://launchlibrary.net/1.4/launch/" + launch
 					);
 					let launchData = response.data.launches[0];
-					console.log("launchData", launchData);
 					return (
 						<LaunchCard
 							key={launchData.id}
@@ -86,13 +78,11 @@ function MyCollections() {
 					);
 				}
 			);
-
 			setLaunches(await Promise.all(launchesData));
 		};
 		if (selectedCollection.launches) {
 			getLaunches();
 		}
-		console.log("Running launch useeffect");
 	}, [selectedCollection]);
 
 	const toggleNewCollection = () => {
@@ -105,9 +95,7 @@ function MyCollections() {
 	const deleteCollection = async () => {
 		await axios
 			.delete("/api/collections/" + selectedCollection._id)
-			.then(res => {
-				console.log("deleted collection", res);
-			})
+			.then(res => {})
 			.catch(err => {
 				console.log("err", err);
 			});
@@ -117,7 +105,6 @@ function MyCollections() {
 		});
 	};
 
-	console.log("launches", launches);
 	return (
 		<Box flex>
 			{collections && (

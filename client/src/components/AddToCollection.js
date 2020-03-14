@@ -17,7 +17,6 @@ function Collection(props) {
 					launch: e[1]
 				})
 				.then(res => {
-					console.log("Add to launch collection", res);
 					setInCollection(true);
 				})
 				.catch(err => {
@@ -29,7 +28,6 @@ function Collection(props) {
 					launch: e[1]
 				})
 				.then(res => {
-					console.log("Remove from launch collection", res);
 					setInCollection(false);
 				})
 				.catch(err => {

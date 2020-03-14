@@ -23,7 +23,6 @@ function AppBar(props) {
 
 	const dispatch = useDispatch();
 	const auth = useSelector(state => state.auth);
-	console.log("Auth", auth.isAuthenticated, auth.user);
 
 	useEffect(() => {
 		if (auth.isAuthenticated) {
@@ -97,10 +96,6 @@ function AppBar(props) {
 								<Button
 									label="Sign out"
 									onClick={() => {
-										console.log(
-											"window.location.href",
-											window.location.pathname
-										);
 										if (
 											window.location.pathname ===
 											"/myCollections"

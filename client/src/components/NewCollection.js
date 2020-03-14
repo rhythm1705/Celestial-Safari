@@ -9,17 +9,14 @@ function NewCollection(props) {
 	const handleSubmit = async event => {
 		let body = { owner: auth.user.id };
 		Object.assign(body, event.value);
-		console.log("New Collection", body);
 		event.preventDefault();
 		let newCollectionInfo = {};
 		await axios
 			.post("/api/collections/", body)
 			.then(res => {
-				console.log("new collection res", res);
 				newCollectionInfo = res.data;
 			})
 			.catch(err => {
-				console.log("err", err);
 			});
 		if (props.type === "launch") {
 			await axios
@@ -27,7 +24,6 @@ function NewCollection(props) {
 					launch: props.itemId
 				})
 				.then(res => {
-					console.log("Add to launch collection", res);
 				})
 				.catch(err => {
 					console.log("err", err);

@@ -180,8 +180,8 @@ function MyCollections() {
 							<ClimbingBoxLoader color="#007575" />
 						</Box>
 					)}
-					<Tabs>
-						{selectedCollection.launches.length > 0 && launches && (
+					{selectedCollection.launches.length > 0 && launches && (
+						<Tabs>
 							<Tab title="Launches">
 								<Box fill overflow="auto" pad="small">
 									<Grid columns="medium" gap="small">
@@ -200,8 +200,8 @@ function MyCollections() {
 									</Grid>
 								</Box>
 							</Tab>
-						)}
-					</Tabs>
+						</Tabs>
+					)}
 				</Box>
 			) : (
 				<Box fill justify="center" align="center">

@@ -13,9 +13,10 @@ function News() {
 
 	const fetchNewsList = async () => {
 		await axios
-			.get("https://spaceflightnewsapi.net/api/v1/articles")
+			.get("https://api.spaceflightnewsapi.net/v3/articles")
 			.then(res => {
-				const News = res.data.docs;
+				console.log("News", res);
+				const News = res.data;
 				setNewsList(News);
 			});
 	};
@@ -29,11 +30,11 @@ function News() {
 						{NewsList.map(news => (
 							<NewsCard
 								title={news.title}
-								image={news.featured_image}
-								site={news.news_site_long}
-								date={news.published_date}
+								image={news.imageUrl}
+								site={news.newsSite}
+								date={news.publishedAt}
 								url={news.url}
-								key={news._id}
+								key={news.id}
 							></NewsCard>
 						))}
 					</>

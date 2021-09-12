@@ -17,7 +17,7 @@ function About() {
 							<User size="medium" color="control" />
 							<Box>
 								<Text size="large" weight="bold">
-									Rhtyhm Goel
+									Rhythm Goel
 								</Text>
 								<Text color="control" weight="bold">
 									Developer and Designer

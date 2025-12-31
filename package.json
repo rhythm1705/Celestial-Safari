@@ -30,7 +30,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.13.9",
 		"nodemon": "^2.0.12",
-		"npm": "^7.23.0",
+		"npm": "^8.11.0",
 		"passport": "^0.4.1",
 		"passport-jwt": "^4.0.0",
 		"validator": "^12.2.0"
